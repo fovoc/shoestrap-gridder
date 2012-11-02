@@ -1,3 +1,7 @@
+<?php
+$excerpt_visibility = get_theme_mod( 'shoestrap_blog_show_text_in_lists' );
+?>
+
 <?php if (!have_posts()) : ?>
   <div class="alert alert-block fade in">
     <a class="close" data-dismiss="alert">&times;</a>
@@ -13,7 +17,9 @@
       <?php get_template_part('templates/entry-meta'); ?>
     </header>
     <div class="entry-content">
-      <?php the_excerpt(); ?>
+      <?php if ( $excerpt_visibility != 'hide' )
+        the_excerpt();
+      ?>
     </div>
     <footer>
       <?php the_tags('<ul class="entry-tags"><li>','</li><li>','</li></ul>'); ?>

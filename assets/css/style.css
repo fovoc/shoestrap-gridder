@@ -2,20 +2,16 @@
   float: left;
   padding: 10px;
   margin-bottom: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  -webkit-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
-.spn1{
-  width: 100%;
-}
+.spn1{ width: 100%; }
 
-.spn2{
-  width: 45%
-}
+.spn2{ width: 45% }
 
-.spn3{
-  width: 30%;
-}
+.spn3{ width: 30%; }
 
-.spn4{
-  width: 22%
-}
+.spn4{ width: 22% }

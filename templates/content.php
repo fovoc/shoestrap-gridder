@@ -13,7 +13,7 @@ $shoestrap_blog_post_class  = shoestrap_blog_posts_column_class( false );
 <?php endif; ?>
 
 <?php while (have_posts()) : the_post(); ?>
-  <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_blog_post_class ); ?>>
+  <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_blog_post_class . ' entry' ); ?>>
     <header>
       <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
       <?php get_template_part('templates/entry-meta'); ?>
@@ -30,8 +30,16 @@ $shoestrap_blog_post_class  = shoestrap_blog_posts_column_class( false );
 <?php endwhile; ?>
 
 <?php if ($wp_query->max_num_pages > 1) : ?>
-  <nav id="post-nav" class="pager">
+  <nav id="post-nav" class="pager" style="clear: both;">
     <div class="previous"><?php next_posts_link(__('&larr; Older posts', 'shoestrap')); ?></div>
     <div class="next"><?php previous_posts_link(__('Newer posts &rarr;', 'shoestrap')); ?></div>
   </nav>
 <?php endif; ?>
+
+<script>
+  jQuery(document).ready(function($){
+    $('#main').masonry({
+      itemSelector: '.entry',
+    });
+  });
+</script>

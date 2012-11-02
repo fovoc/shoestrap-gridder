@@ -8,3 +8,9 @@ Author: Aristeides Stathopoulos
 Author URI: http://aristeides.com
 */
 
+// Check if the Shoestrap theme is enabled.
+// Only process this plugin if the enabled theme is called shoestrap
+$shoestrap_enabled = wp_get_theme( 'shoestrap' );
+if ( $shoestrap_enabled->exists() ) {
+  
+}

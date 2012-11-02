@@ -1,6 +1,7 @@
 <?php
 $excerpt_visibility         = get_theme_mod( 'shoestrap_blog_show_text_in_lists' );
-$shoestrap_blog_post_class  = shoestrap_blog_posts_column_class( false );
+$shoestrap_blog_post_class  = shoestrap_blog_posts_column( false );
+$columns = get_theme_mod( 'shoestrap_blog_posts_columns' );
 
 ?>
 
@@ -15,10 +16,14 @@ $shoestrap_blog_post_class  = shoestrap_blog_posts_column_class( false );
 <?php while (have_posts()) : the_post(); ?>
   <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_blog_post_class . ' entry' ); ?>>
     <header>
-      <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+      <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
       <?php get_template_part('templates/entry-meta'); ?>
     </header>
     <div class="entry-content">
+      <?php if (has_post_thumbnail()) {
+        the_post_thumbnail('thumbnail');
+      }?>
+
       <?php if ( $excerpt_visibility != 'hide' )
         the_excerpt();
       ?>
@@ -38,8 +43,16 @@ $shoestrap_blog_post_class  = shoestrap_blog_posts_column_class( false );
 
 <script>
   jQuery(document).ready(function($){
-    $('#main').masonry({
-      itemSelector: '.entry',
+    var $container = $('#main');
+    
+    $container.imagesLoaded( function(){
+      $container.masonry({
+
+        itemSelector: '.entry',
+        columnWidth: function( containerWidth ) {
+          return containerWidth / <?php echo $columns; ?>;
+        }
+      });
     });
   });
 </script>

@@ -19,4 +19,13 @@ if ( $shoestrap_enabled->exists() ) {
   require_once dirname( __FILE__ ) . '/includes/customizer/controls.php';
   require_once dirname( __FILE__ ) . '/includes/customizer/functions.php';
   require_once dirname( __FILE__ ) . '/includes/customizer/output.php';
+  
+  function shoestrap_blog_enqueue_resources() {
+    wp_register_script('shoestrap_blog_infinitescroll', plugins_url( 'assets/js/jquery.infinitescroll.js', __FILE__ ), false, null, false);
+    wp_register_script('shoestrap_blog_isotope', plugins_url( 'assets/js/jquery.isotope.js', __FILE__ ), false, null, false);
+    wp_enqueue_script('shoestrap_blog_infinitescroll');
+    wp_enqueue_script('shoestrap_blog_isotope');
+  }
+  add_action('wp_enqueue_scripts', 'shoestrap_blog_enqueue_resources', 103);
+
 }

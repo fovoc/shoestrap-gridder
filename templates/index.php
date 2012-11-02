@@ -21,11 +21,11 @@ $list_title_size            = get_theme_mod( 'shoestrap_blog_list_title_size' );
       
     </header>
     <div class="entry-content">
-      <?php if (has_post_thumbnail()) {
-        echo '<div class="pull-left">';
-        the_post_thumbnail('shoestrap-blog-grid');
-        echo '</div>';
-      }?>
+      <?php if (has_post_thumbnail()) { ?>
+        <div class="pull-left">
+          <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('shoestrap-blog-grid'); ?></a>
+        </div>
+      <?php }?>
 
       <?php if ( $excerpt_visibility != 'hide' )
         the_excerpt();

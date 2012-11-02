@@ -21,6 +21,8 @@ if ( $shoestrap_enabled->exists() ) {
   require_once dirname( __FILE__ ) . '/includes/customizer/output.php';
   
   function shoestrap_blog_enqueue_resources() {
+    wp_enqueue_style('shoestrap_styles', plugins_url('assets/css/style.css', __FILE__), false, null);
+    
     wp_register_script('shoestrap_blog_infinitescroll', plugins_url( 'assets/js/jquery.infinitescroll.min.js', __FILE__ ), false, null, false);
     wp_register_script('shoestrap_blog_isotope', plugins_url( 'assets/js/jquery.masonry.min.js', __FILE__ ), false, null, false);
     wp_enqueue_script('shoestrap_blog_infinitescroll');

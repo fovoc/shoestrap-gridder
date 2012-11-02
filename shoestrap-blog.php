@@ -12,5 +12,5 @@ Author URI: http://aristeides.com
 // Only process this plugin if the enabled theme is called shoestrap
 $shoestrap_enabled = wp_get_theme( 'shoestrap' );
 if ( $shoestrap_enabled->exists() ) {
-  
+  require_once dirname( __FILE__ ) . '/template-redirects.php';
 }

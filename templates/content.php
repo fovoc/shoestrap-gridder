@@ -1,5 +1,7 @@
 <?php
-$excerpt_visibility = get_theme_mod( 'shoestrap_blog_show_text_in_lists' );
+$excerpt_visibility         = get_theme_mod( 'shoestrap_blog_show_text_in_lists' );
+$shoestrap_blog_post_class  = shoestrap_blog_posts_column_class( false );
+
 ?>
 
 <?php if (!have_posts()) : ?>
@@ -11,7 +13,7 @@ $excerpt_visibility = get_theme_mod( 'shoestrap_blog_show_text_in_lists' );
 <?php endif; ?>
 
 <?php while (have_posts()) : the_post(); ?>
-  <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+  <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_blog_post_class ); ?>>
     <header>
       <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
       <?php get_template_part('templates/entry-meta'); ?>

@@ -29,6 +29,20 @@ function shoestrap_blog_register_controls($wp_customize){
     ),
   ));
   
+  $wp_customize->add_control( 'shoestrap_blog_posts_columns', array(
+    'label'       => __( 'Columns', 'shoestrap_blog' ),
+    'section'     => 'shoestrap_blog',
+    'settings'    => 'shoestrap_blog_posts_columns',
+    'type'        => 'select',
+    'priority'    => 1,
+    'choices'     => array(
+      '1'         => '1',
+      '2'         => '2',
+      '3'         => '3',
+      '4'         => '4',
+    ),
+  ));
+  
   $wp_customize->add_control( 'posts_per_page', array(
     'label'       => __( 'Products Per Page', 'shoestrap_blog' ),
     'section'     => 'shoestrap_blog',

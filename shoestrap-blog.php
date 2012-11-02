@@ -17,5 +17,6 @@ if ( $shoestrap_enabled->exists() ) {
   require_once dirname( __FILE__ ) . '/includes/customizer/sections.php';
   require_once dirname( __FILE__ ) . '/includes/customizer/settings.php';
   require_once dirname( __FILE__ ) . '/includes/customizer/controls.php';
+  require_once dirname( __FILE__ ) . '/includes/customizer/functions.php';
   require_once dirname( __FILE__ ) . '/includes/customizer/output.php';
 }

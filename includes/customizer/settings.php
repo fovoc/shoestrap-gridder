@@ -17,4 +17,4 @@ function shoestrap_gridder_register_settings($wp_customize){
 ) );
   
 }
-add_action( 'customize_register', 'shoestrap_blog_register_settings' );
+add_action( 'customize_register', 'shoestrap_gridder_register_settings' );

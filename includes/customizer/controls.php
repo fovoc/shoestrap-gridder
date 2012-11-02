@@ -43,6 +43,18 @@ function shoestrap_blog_register_controls($wp_customize){
     ),
   ));
   
+  $wp_customize->add_control( 'shoestrap_blog_list_title_size', array(
+    'label'       => __( 'Size of list titles', 'shoestrap_blog' ),
+    'section'     => 'shoestrap_blog',
+    'settings'    => 'shoestrap_blog_list_title_size',
+    'type'        => 'select',
+    'priority'    => 1,
+    'choices'     => array(
+      'h3'        => 'h3',
+      'h4'        => 'h4',
+    ),
+  ));
+  
   $wp_customize->add_control( 'posts_per_page', array(
     'label'       => __( 'Products Per Page', 'shoestrap_blog' ),
     'section'     => 'shoestrap_blog',

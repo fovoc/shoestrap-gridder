@@ -1,7 +1,8 @@
 <?php
 $excerpt_visibility         = get_theme_mod( 'shoestrap_blog_show_text_in_lists' );
 $shoestrap_blog_post_class  = shoestrap_blog_posts_column( false );
-$columns = get_theme_mod( 'shoestrap_blog_posts_columns' );
+$columns                    = get_theme_mod( 'shoestrap_blog_posts_columns' );
+$list_title_size            = get_theme_mod( 'shoestrap_blog_list_title_size' );
 
 ?>
 
@@ -16,7 +17,8 @@ $columns = get_theme_mod( 'shoestrap_blog_posts_columns' );
 <?php while (have_posts()) : the_post(); ?>
   <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_blog_post_class . ' entry' ); ?>>
     <header>
-      <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+      <<?php echo $list_title_size; ?>><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></<?php echo $list_title_size; ?>>
+      
     </header>
     <div class="entry-content">
       <?php if (has_post_thumbnail()) {

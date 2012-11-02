@@ -33,5 +33,6 @@
 }
 
 .entry-content .pull-left{
-  margin-right: 5px;
+  max-width: 100%;
+  height:auto;
 }

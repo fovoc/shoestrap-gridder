@@ -1,8 +1,8 @@
 <?php
 
-function shoestrap_blog_posts_column( $echo = true ) {
+function shoestrap_gridder_posts_column( $echo = true ) {
   
-  $columns = get_theme_mod( 'shoestrap_blog_posts_columns' );
+  $columns = get_theme_mod( 'shoestrap_gridder_posts_columns' );
   
   if ( $columns == '1' ) {
     $class = 'spn1';
@@ -21,9 +21,9 @@ function shoestrap_blog_posts_column( $echo = true ) {
   }
 }
 
-function shoestrap_blog_nnth_child_margins() {
+function shoestrap_gridder_nnth_child_margins() {
   
-  $n = get_theme_mod( 'shoestrap_blog_posts_columns' );
+  $n = get_theme_mod( 'shoestrap_gridder_posts_columns' );
   ?>
   <style>
     .entry:first-child{margin-left: 0;}
@@ -31,6 +31,6 @@ function shoestrap_blog_nnth_child_margins() {
   </style>
   
 <?php }
-if ( get_theme_mod( 'shoestrap_blog_frontpage' ) != 'default' ) {
-  add_action( 'wp_head', 'shoestrap_blog_nnth_child_margins', 120 );
+if ( get_theme_mod( 'shoestrap_gridder_frontpage' ) != 'default' ) {
+  add_action( 'wp_head', 'shoestrap_gridder_nnth_child_margins', 120 );
 }

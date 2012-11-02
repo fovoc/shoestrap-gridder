@@ -1,8 +1,8 @@
 <?php
-$excerpt_visibility         = get_theme_mod( 'shoestrap_blog_show_text_in_lists' );
-$shoestrap_blog_post_class  = shoestrap_blog_posts_column( false );
-$columns                    = get_theme_mod( 'shoestrap_blog_posts_columns' );
-$list_title_size            = get_theme_mod( 'shoestrap_blog_list_title_size' );
+$excerpt_visibility           = get_theme_mod( 'shoestrap_gridder_show_text_in_lists' );
+$shoestrap_gridder_post_class = shoestrap_gridder_posts_column( false );
+$columns                      = get_theme_mod( 'shoestrap_gridder_posts_columns' );
+$list_title_size              = get_theme_mod( 'shoestrap_gridder_list_title_size' );
 
 ?>
 
@@ -15,7 +15,7 @@ $list_title_size            = get_theme_mod( 'shoestrap_blog_list_title_size' );
 <?php endif; ?>
 
 <?php while (have_posts()) : the_post(); ?>
-  <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_blog_post_class . ' entry' ); ?>>
+  <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_gridder_post_class . ' entry' ); ?>>
     <header>
       <<?php echo $list_title_size; ?>><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></<?php echo $list_title_size; ?>>
       
@@ -23,7 +23,7 @@ $list_title_size            = get_theme_mod( 'shoestrap_blog_list_title_size' );
     <div class="entry-content">
       <?php if (has_post_thumbnail()) { ?>
         <div class="pull-left">
-          <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('shoestrap-blog-grid'); ?></a>
+          <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('shoestrap-gridder-grid'); ?></a>
         </div>
       <?php }?>
 

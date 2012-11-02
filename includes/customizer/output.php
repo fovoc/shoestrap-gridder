@@ -1,6 +1,6 @@
 <?php
 
-function shoestrap_blog_customizer_output() {
+function shoestrap_gridder_customizer_output() {
   
   $background_color = get_theme_mod( 'background_color' );
   $background_color = '#' . str_replace( '#', '', $background_color );
@@ -18,4 +18,4 @@ function shoestrap_blog_customizer_output() {
   </style>
 
 <?php }
-add_action( 'wp_head', 'shoestrap_blog_customizer_output' );
+add_action( 'wp_head', 'shoestrap_gridder_customizer_output' );

@@ -1,11 +1,8 @@
 <?php
   
-function shoestrap_blog_load_single_template($template) {
+function shoestrap_gridder_load_single_template($template) {
   global $wp_query, $post;
   
-  $frontpage_mode = get_theme_mod( 'shoestrap_blog_frontpage' );
-
-  // Frontpage Posts list (if selected so in the customizer)
   if ( !is_singular() ) {
     return dirname(__FILE__) . '/templates/content.php';
   } elseif ( is_page() ) {
@@ -14,4 +11,4 @@ function shoestrap_blog_load_single_template($template) {
     return dirname(__FILE__) . '/templates/single.php';
   }
 }
-add_filter('template_include', 'shoestrap_blog_load_single_template', 1, 1);
+add_filter('template_include', 'shoestrap_gridder_load_single_template', 1, 1);

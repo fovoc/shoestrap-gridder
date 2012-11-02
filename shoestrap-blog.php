@@ -8,6 +8,8 @@ Author: Aristeides Stathopoulos
 Author URI: http://aristeides.com
 */
 
+add_image_size( 'shoestrap-blog-grid', 257 );
+
 // Check if the Shoestrap theme is enabled.
 // Only process this plugin if the enabled theme is called shoestrap
 $shoestrap_enabled = wp_get_theme( 'shoestrap' );

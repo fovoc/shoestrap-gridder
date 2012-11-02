@@ -17,11 +17,12 @@ $columns = get_theme_mod( 'shoestrap_blog_posts_columns' );
   <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_blog_post_class . ' entry' ); ?>>
     <header>
       <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-      <?php get_template_part('templates/entry-meta'); ?>
     </header>
     <div class="entry-content">
       <?php if (has_post_thumbnail()) {
-        the_post_thumbnail('thumbnail');
+        echo '<div class="pull-left">';
+        the_post_thumbnail('shoestrap-blog-grid');
+        echo '</div>';
       }?>
 
       <?php if ( $excerpt_visibility != 'hide' )

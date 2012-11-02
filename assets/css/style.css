@@ -1,3 +1,8 @@
+#main .articles{
+  clear: both;
+  float: none;
+}
+
 .entry{
   float: left;
   padding: 10px;
@@ -10,8 +15,23 @@
 
 .spn1{ width: 100%; }
 
-.spn2{ width: 45% }
+@media (min-width: 768px) {
+  .spn2{ width: 45% }
+  
+  .spn3{ width: 30%; }
+  
+  .spn4{ width: 22% }
+}
 
-.spn3{ width: 30%; }
+@media (max-width: 767px) {
+  .spn1, .spn2, .spn3, .spn4{ width: 95%; }
+}
 
-.spn4{ width: 22% }
+#post-nav{
+  clear: both;
+  float: none;
+}
+
+.entry-content .pull-left{
+  margin-right: 5px;
+}

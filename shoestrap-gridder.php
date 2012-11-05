@@ -35,3 +35,6 @@ if ( $shoestrap_enabled -> exists() || $shoestrap_child_enabled -> exists() ) {
   add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 103);
 
 }
+
+// Load the plugin updater
+require_once dirname( __FILE__ ) . '/includes/updater/licencing.php';

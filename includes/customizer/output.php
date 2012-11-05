@@ -2,7 +2,7 @@
 
 function shoestrap_gridder_customizer_output() {
   
-  $background_color = get_theme_mod( 'background_color' );
+  $background_color = get_theme_mod( 'shoestrap_background_color' );
   $background_color = '#' . str_replace( '#', '', $background_color );
   ?>
   <style>

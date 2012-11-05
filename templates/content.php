@@ -4,6 +4,8 @@ $shoestrap_gridder_post_class = shoestrap_gridder_posts_column( false );
 $columns                      = get_theme_mod( 'shoestrap_gridder_posts_columns' );
 $list_title_size              = get_theme_mod( 'shoestrap_gridder_list_title_size' );
 
+$responsive                   = get_theme_mod( 'shoestrap_responsive' );
+if ( $responsive == '0' ) { $layout = 'fixed'; } else { $layout = 'responsive'; }
 ?>
 
 <?php if (!have_posts()) : ?>
@@ -15,7 +17,7 @@ $list_title_size              = get_theme_mod( 'shoestrap_gridder_list_title_siz
 <?php endif; ?>
 
 <?php while (have_posts()) : the_post(); ?>
-  <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_gridder_post_class . ' entry' ); ?>>
+  <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_gridder_post_class . ' entry ' . $layout ); ?>>
     <header>
       <<?php echo $list_title_size; ?>><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></<?php echo $list_title_size; ?>>
       
@@ -53,8 +55,11 @@ $list_title_size              = get_theme_mod( 'shoestrap_gridder_list_title_siz
 
         itemSelector: '.entry',
         columnWidth: function( containerWidth ) {
-          return containerWidth / <?php echo $columns; ?>;
-        }
+          return containerWidth / 12;
+        },
+        // gutterWidth: 20,
+        isResizable: true,
+        isAnimated: !Modernizr.csstransitions
       });
     });
     

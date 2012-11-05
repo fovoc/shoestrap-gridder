@@ -13,18 +13,33 @@
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
-.spn1{ width: 100%; }
+.entry.narrow{ width: 22%; }
+.entry.normal{ width: 30%; }
+.entry.wide{ width: 43%; }
 
-@media (min-width: 768px) {
-  .spn2{ width: 45% }
-  
-  .spn3{ width: 30%; }
-  
-  .spn4{ width: 22% }
+@media (max-width: 480px) {
+  .entry.narrow{ width: 96%; }
+  .entry.normal{ width: 96%; }
+  .entry.wide{ width: 96%; }
 }
 
-@media (max-width: 767px) {
-  .spn1, .spn2, .spn3, .spn4{ width: 95%; }
+@media (min-width: 481px) {
+  .span10 .entry.narrow{ width: 19%; }
+  .span10 .entry.normal{ width: 28%; }
+
+  .span9 .entry.narrow{ width: 20%; }
+  .span9 .entry.normal{ width: 27%; }
+
+  .span8 .entry.narrow{ width: 20%; }
+  .span8 .entry.normal{ width: 28%; }
+
+  .span7 .entry.narrow{ width: 19%; }
+  .span7 .entry.normal{ width: 27%; }
+
+  .span6 .entry.narrow{ width: 27%; }
+  .span6 .entry.normal{ width: 42%; }
+
+  .span6 .entry.wide.fixed{ width: 96%; }
 }
 
 #post-nav{

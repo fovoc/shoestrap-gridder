@@ -18,16 +18,15 @@ function shoestrap_gridder_register_controls($wp_customize){
   ));
   
   $wp_customize->add_control( 'shoestrap_gridder_posts_columns', array(
-    'label'       => __( 'Columns', 'shoestrap_gridder' ),
+    'label'       => __( '"Slide" width', 'shoestrap_gridder' ),
     'section'     => 'shoestrap_gridder',
     'settings'    => 'shoestrap_gridder_posts_columns',
     'type'        => 'select',
     'priority'    => 1,
     'choices'     => array(
-      '1'         => '1',
-      '2'         => '2',
-      '3'         => '3',
-      '4'         => '4',
+      'narrow'    => 'Narrow',
+      'normal'    => 'Normal',
+      'wide'      => 'Wide',
     ),
   ));
   

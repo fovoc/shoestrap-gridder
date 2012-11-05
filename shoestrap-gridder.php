@@ -12,8 +12,6 @@ add_image_size( 'shoestrap-gridder-grid', 350 );
 
 // Check if the Shoestrap theme is enabled.
 // Only process this plugin if the enabled theme is called shoestrap
-$shoestrap_enabled = wp_get_theme( 'shoestrap' );
-if ( $shoestrap_enabled->exists() ) {
   require_once dirname( __FILE__ ) . '/template-redirects.php';
   
   require_once dirname( __FILE__ ) . '/includes/customizer/sections.php';
@@ -21,15 +19,13 @@ if ( $shoestrap_enabled->exists() ) {
   require_once dirname( __FILE__ ) . '/includes/customizer/controls.php';
   require_once dirname( __FILE__ ) . '/includes/customizer/functions.php';
   require_once dirname( __FILE__ ) . '/includes/customizer/output.php';
-  
-  function shoestrap_gridder_enqueue_resources() {
-    wp_enqueue_style('shoestrap_styles', plugins_url('assets/css/style.css', __FILE__), false, null);
-    
-    wp_register_script('shoestrap_gridder_infinitescroll', plugins_url( 'assets/js/jquery.infinitescroll.min.js', __FILE__ ), false, null, false);
-    wp_register_script('shoestrap_gridder_isotope', plugins_url( 'assets/js/jquery.masonry.min.js', __FILE__ ), false, null, false);
-    wp_enqueue_script('shoestrap_gridder_infinitescroll');
-    wp_enqueue_script('shoestrap_gridder_isotope');
-  }
-  add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 103);
 
+  function shoestrap_gridder_enqueue_resources() {
+  wp_enqueue_style('shoestrap_styles', plugins_url('assets/css/style.css', __FILE__), false, null);
+  
+  wp_register_script('shoestrap_gridder_infinitescroll', plugins_url( 'assets/js/jquery.infinitescroll.min.js', __FILE__ ), false, null, false);
+  wp_register_script('shoestrap_gridder_isotope', plugins_url( 'assets/js/jquery.masonry.min.js', __FILE__ ), false, null, false);
+  wp_enqueue_script('shoestrap_gridder_infinitescroll');
+  wp_enqueue_script('shoestrap_gridder_isotope');
 }
+add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 103);

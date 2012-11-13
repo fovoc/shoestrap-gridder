@@ -20,14 +20,14 @@ $edd_updater = new EDD_SL_Plugin_Updater( SHOESTRAP_GRIDDER_STORE_URL, __FILE__,
   )
 );
 
-add_action( 'shoestrap_admin_content', 'shoestrap_gridder_licensing' );
+add_action( 'shoestrap_admin_content', 'shoestrap_gridder_licensing', 11 );
 function shoestrap_gridder_licensing() {
   $license  = get_option( 'shoestrap_gridder_license_key' );
   $status   = get_option( 'shoestrap_gridder_license_status' );
   $submit_text  = __( 'Save & activate licence', 'shoestrap' );
   ?>
   <div class="postbox">
-    <h3 class="hndle" style="padding: 7px 10px;"><span><?php _e( 'Shoestrap Easy Digital Downloads Addon Licence', 'shoestrap' ); ?></span></h3>
+    <h3 class="hndle" style="padding: 7px 10px;"><span><?php _e( 'Shoestrap Gridder Addon Licence', 'shoestrap' ); ?></span></h3>
     <div class="inside">
       <form method="post" action="options.php">
         <?php settings_fields('shoestrap_gridder_license'); ?>

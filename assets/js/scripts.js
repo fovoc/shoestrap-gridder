@@ -1,7 +1,7 @@
 jQuery(window).load(function() {
   var $container = $('#main');
   
-  $container.imagesLoaded( function(){
+  //$container.imagesLoaded( function(){
     $container.masonry({
 
       itemSelector: '.entry',
@@ -11,16 +11,16 @@ jQuery(window).load(function() {
       // gutterWidth: 20,
       isResizable: true,
       isAnimated: !Modernizr.csstransitions
-    });
+  //  });
   });
-  
+  /*
   $container.imagesLoaded(function(){
     $container.masonry({
       itemSelector: '.entry',
       columnWidth: 100
     });
   });
-
+*/
   $container.infinitescroll({
     navSelector  : '#post-nav',    // selector for the paged navigation
     nextSelector : '#post-nav .previous a',  // selector for the NEXT link (to page 2)

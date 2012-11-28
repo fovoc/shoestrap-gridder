@@ -1,7 +1,6 @@
 jQuery(window).load(function() {
   var $container = $('#main');
   
-  $container.imagesLoaded( function(){
     $container.masonry({
 
       itemSelector: '.entry',
@@ -11,14 +10,6 @@ jQuery(window).load(function() {
       // gutterWidth: 20,
       isResizable: true,
       isAnimated: !Modernizr.csstransitions
-    });
-  });
-  
-  $container.imagesLoaded(function(){
-    $container.masonry({
-      itemSelector: '.entry',
-      columnWidth: 100
-    });
   });
 
   $container.infinitescroll({

@@ -48,9 +48,7 @@ if ( $shoestrap_enabled -> exists() || $shoestrap_child_enabled -> exists() ) {
     global $mp;
     $view_mode = '';
     $view_mode = $mp->get_setting('list_view');
-    if ( $view_mode != 'grid' && $view_mode != 'list' ) {
-      $view_mode = 'grid';
-    }
+    if ( $view_mode != 'grid' && $view_mode != 'list' ) { $view_mode = 'grid'; } //compatibility with marketpress versions prior to 2.8
     
     // Register the appropriate script if MarketPress is installed
     if ( class_exists( 'MarketPress' ) && mp_is_shop_page() ) {
@@ -74,7 +72,12 @@ if ( $shoestrap_enabled -> exists() || $shoestrap_child_enabled -> exists() ) {
       wp_enqueue_script('shoestrap_gridder_script');
     }
   }
-  add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 103);
+  
+  function shoestrap_gridder_enqueue_resources_checked() {
+    if ( !is_singular() ) {
+      add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 103);
+    }
+  }
 }
 
 // Load the plugin updater

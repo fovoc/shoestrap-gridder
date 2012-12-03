@@ -39,14 +39,14 @@ if ( $shoestrap_enabled -> exists() || $shoestrap_child_enabled -> exists() ) {
     // Plugin-specific script
     wp_register_script('shoestrap_gridder_script', plugins_url( 'assets/js/scripts.js', __FILE__ ), false, null, false);
     wp_enqueue_script('shoestrap_gridder_script');
-  }
-  
-  add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 103);
 
-  wp_localize_script( 'shoestrap_gridder_script', 'shoestrapScript', array(
-    'finishedMsg'   => __( 'No more pages', 'shoestrap_gridder' ),
-    'loadingImg'    => 'http://i.imgur.com/6RMhx.gif',
-  ) );
+  }
+  function shoestrap_gridder_wp_enqueue_scripts_check() {
+    if ( !is_singular() ) {
+      add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 103);
+    }
+    add_action( 'wp', 'shoestrap_gridder_wp_enqueue_scripts_check' );
+  }
 }
 
 // Load the plugin updater

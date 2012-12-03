@@ -1,21 +1,21 @@
 jQuery(window).load(function() {
-  var $container = $('#main');
+  var $container = $('#product_grid');
   
-    $container.masonry({
-
-      itemSelector: '.entry',
-      columnWidth: function( containerWidth ) {
-        return containerWidth / 12;
-      },
-      // gutterWidth: 20,
-      isResizable: true,
-      isAnimated: !Modernizr.csstransitions
-  });
+    // $container.masonry({
+// 
+      // itemSelector: '.product',
+      // columnWidth: function( containerWidth ) {
+        // return containerWidth / 12;
+      // },
+      // // gutterWidth: 20,
+      // isResizable: true,
+      // isAnimated: !Modernizr.csstransitions
+  // });
 
   $container.infinitescroll({
-    navSelector  : '#post-nav',    // selector for the paged navigation
-    nextSelector : '#post-nav .previous a',  // selector for the NEXT link (to page 2)
-    itemSelector : '.entry',     // selector for all items you'll retrieve
+    navSelector  : '.pagination',    // selector for the paged navigation
+    nextSelector : '.pagination .next a',  // selector for the NEXT link (to page 2)
+    itemSelector : '.product',     // selector for all items you'll retrieve
     loading: {
         finishedMsg: 'No more pages to load.',
       }

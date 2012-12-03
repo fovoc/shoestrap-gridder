@@ -38,7 +38,11 @@ if ( $shoestrap_enabled -> exists() || $shoestrap_child_enabled -> exists() ) {
     
     // Plugin-specific script
     wp_register_script('shoestrap_gridder_script', plugins_url( 'assets/js/scripts.js', __FILE__ ), false, null, false);
-    wp_enqueue_script('shoestrap_gridder_script');
+
+    wp_localize_script( 'shoestrap_gridder_script', 'shoestrapScript', array(
+      'finishedMsg'   => __( 'No more pages', 'shoestrap_gridder' ),
+      'loadingImg'    => 'http://i.imgur.com/6RMhx.gif',
+    ) );
 
     // MarketPress-specific script
     global $mp;
@@ -48,21 +52,29 @@ if ( $shoestrap_enabled -> exists() || $shoestrap_child_enabled -> exists() ) {
       $view_mode = 'grid';
     }
     
-    if ( class_exists( 'MarketPress' ) ) {
+    // Register the appropriate script if MarketPress is installed
+    if ( class_exists( 'MarketPress' ) && mp_is_shop_page() ) {
       if ( $view_mode == 'list' ) {
+        echo 'mp exists';
         wp_register_script('shoestrap_gridder_mp_script', plugins_url( 'assets/js/scripts-mp-list.js', __FILE__ ), false, null, false);
       } else {
         wp_register_script('shoestrap_gridder_mp_script', plugins_url( 'assets/js/scripts-mp-grid.js', __FILE__ ), false, null, false);
       }
-      wp_enqueue_script('shoestrap_gridder_mp_script');
+    }
+    if ( class_exists( 'MarketPress' ) ) {
+      // if mp is installed and user IS viewing a store page, enqueue the marketpress script.
+      if ( !mp_is_shop_page() ) {
+        wp_enqueue_script('shoestrap_gridder_script');
+      // if mp is installed and user IS NOT viewing a store page, enqueue the default script.
+      } else {
+        wp_enqueue_script('shoestrap_gridder_mp_script');
+      }
+    // if mp is NOT installed enqueue the default script.
+    } else {
+      wp_enqueue_script('shoestrap_gridder_script');
     }
   }
-  function shoestrap_gridder_wp_enqueue_scripts_check() {
-    if ( !is_singular() ) {
-      add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 103);
-    }
-    add_action( 'wp', 'shoestrap_gridder_wp_enqueue_scripts_check' );
-  }
+  add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 103);
 }
 
 // Load the plugin updater

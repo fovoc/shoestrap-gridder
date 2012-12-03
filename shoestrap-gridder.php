@@ -41,8 +41,19 @@ if ( $shoestrap_enabled -> exists() || $shoestrap_child_enabled -> exists() ) {
     wp_enqueue_script('shoestrap_gridder_script');
 
     // MarketPress-specific script
+    global $mp;
+    $view_mode = '';
+    $view_mode = $mp->get_setting('list_view');
+    if ( $view_mode != 'grid' && $view_mode != 'list' ) {
+      $view_mode = 'grid';
+    }
+    
     if ( class_exists( 'MarketPress' ) ) {
-      wp_register_script('shoestrap_gridder_mp_script', plugins_url( 'assets/js/scripts-mp.js', __FILE__ ), false, null, false);
+      if ( $view_mode == 'list' ) {
+        wp_register_script('shoestrap_gridder_mp_script', plugins_url( 'assets/js/scripts-mp-list.js', __FILE__ ), false, null, false);
+      } else {
+        wp_register_script('shoestrap_gridder_mp_script', plugins_url( 'assets/js/scripts-mp-grid.js', __FILE__ ), false, null, false);
+      }
       wp_enqueue_script('shoestrap_gridder_mp_script');
     }
   }

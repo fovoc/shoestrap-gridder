@@ -40,6 +40,11 @@ if ( $shoestrap_enabled -> exists() || $shoestrap_child_enabled -> exists() ) {
     wp_register_script('shoestrap_gridder_script', plugins_url( 'assets/js/scripts.js', __FILE__ ), false, null, false);
     wp_enqueue_script('shoestrap_gridder_script');
 
+    // MarketPress-specific script
+    if ( class_exists( 'MarketPress' ) ) {
+      wp_register_script('shoestrap_gridder_mp_script', plugins_url( 'assets/js/scripts-mp.js', __FILE__ ), false, null, false);
+      wp_enqueue_script('shoestrap_gridder_mp_script');
+    }
   }
   function shoestrap_gridder_wp_enqueue_scripts_check() {
     if ( !is_singular() ) {

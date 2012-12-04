@@ -8,5 +8,9 @@ jQuery(window).load(function() {
     loading: {
         finishedMsg: 'No more pages to load.',
       }
-  });
+    },
+    function( newElements ) {
+        $("a.mp_link_buynow, a.mp_link_addcart, input[type='submit'], .mp_button_addcart, .mp_button_buynow").addClass("btn btn-primary");
+    }
+  );
 });

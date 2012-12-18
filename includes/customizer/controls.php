@@ -49,5 +49,19 @@ function shoestrap_gridder_register_controls($wp_customize){
     'type'        => 'text'
   ));
   
+  $wp_customize->add_control( 'shoestrap_gridder_loading_text', array(
+    'label'       => __( 'Message for loading', 'shoestrap_gridder' ),
+    'section'     => 'shoestrap_gridder',
+    'settings'    => 'shoestrap_gridder_loading_text',
+    'type'        => 'text'
+  ));
+
+  $wp_customize->add_control( 'shoestrap_gridder_end_text', array(
+    'label'       => __( 'Message for Ending', 'shoestrap_gridder' ),
+    'section'     => 'shoestrap_gridder',
+    'settings'    => 'shoestrap_gridder_end_text',
+    'type'        => 'text'
+  ));
+
 }
 add_action( 'customize_register', 'shoestrap_gridder_register_controls' );

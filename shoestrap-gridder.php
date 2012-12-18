@@ -34,8 +34,8 @@ function shoestrap_gridder_enqueue_resources() {
   // Infinite scroll jQuery Plugin
   wp_register_script('shoestrap_gridder_infinitescroll', plugins_url( 'assets/js/jquery.infinitescroll.min.js', __FILE__ ), false, null, false);
   wp_enqueue_script('shoestrap_gridder_infinitescroll');
-  
-  // Masonry jQuery Plugin
+	
+	// Masonry jQuery Plugin
   wp_register_script('shoestrap_gridder_masonry', plugins_url( 'assets/js/jquery.masonry.min.js', __FILE__ ), false, null, false);
   wp_enqueue_script('shoestrap_gridder_masonry');
   
@@ -43,11 +43,14 @@ function shoestrap_gridder_enqueue_resources() {
   wp_register_script('shoestrap_gridder_script', plugins_url( 'assets/js/scripts.js', __FILE__ ), false, null, false);
 
   wp_localize_script( 'shoestrap_gridder_script', 'shoestrapScript', array(
-    'finishedMsg'   => __( 'No more pages', 'shoestrap_gridder' ),
+    'finishedMsg'   => __( get_theme_mod('shoestrap_gridder_end_text') ),
     'loadingImg'    => 'http://i.imgur.com/6RMhx.gif',
   ) );
 
-  //compatibility with marketpress versions prior to 2.8
+  $translation_array = array( 'text' => __( get_theme_mod('shoestrap_gridder_loading_text')) );
+	wp_localize_script( 'shoestrap_gridder_infinitescroll', 'msg', $translation_array );
+	
+	//compatibility with marketpress versions prior to 2.8
   if ( $view_mode != 'grid' && $view_mode != 'list' ) {
     $view_mode = 'grid';
   }

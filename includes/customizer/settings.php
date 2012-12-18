@@ -6,6 +6,8 @@ function shoestrap_gridder_register_settings($wp_customize){
   $settings[] = array( 'slug'=> 'shoestrap_gridder_show_text_in_lists', 'default' => 'show');
   $settings[] = array( 'slug'=> 'shoestrap_gridder_posts_columns',      'default' => '3');
   $settings[] = array( 'slug'=> 'shoestrap_gridder_list_title_size',    'default' => 'h3');
+	$settings[] = array( 'slug'=> 'shoestrap_gridder_loading_text',   		'default' => 'Loading...');
+	$settings[] = array( 'slug'=> 'shoestrap_gridder_end_text',   			  'default' => 'End of list');
 
   foreach($settings as $setting){
     $wp_customize->add_setting( $setting['slug'], array( 'default' => $setting['default'], 'type' => 'theme_mod', 'capability' => 'edit_theme_options' ));

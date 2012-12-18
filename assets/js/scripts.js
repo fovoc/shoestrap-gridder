@@ -11,14 +11,14 @@ jQuery(window).load(function() {
       isResizable: true,
       isAnimated: !Modernizr.csstransitions
   });
-
+	
   $container.infinitescroll({
     navSelector  : '#post-nav',    // selector for the paged navigation
     nextSelector : '#post-nav .previous a',  // selector for the NEXT link (to page 2)
     itemSelector : '.entry',     // selector for all items you'll retrieve
-    loading: {
-        finishedMsg: 'No more pages to load.',
-      }
+	    loading: {
+	        finishedMsg: shoestrapScript.end,
+	      }
     },
     // trigger Masonry as a callback
     function( newElements ) {

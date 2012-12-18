@@ -43,11 +43,11 @@ function shoestrap_gridder_enqueue_resources() {
   wp_register_script('shoestrap_gridder_script', plugins_url( 'assets/js/scripts.js', __FILE__ ), false, null, false);
 
   wp_localize_script( 'shoestrap_gridder_script', 'shoestrapScript', array(
-    'finishedMsg'   => __( get_theme_mod('shoestrap_gridder_end_text') ),
     'loadingImg'    => 'http://i.imgur.com/6RMhx.gif',
+    'end' 					=> __( get_theme_mod('shoestrap_gridder_end_text'))
   ) );
 
-  $translation_array = array( 'text' => __( get_theme_mod('shoestrap_gridder_loading_text')) );
+	$translation_array = array( 'text' => __( get_theme_mod('shoestrap_gridder_loading_text')) );
 	wp_localize_script( 'shoestrap_gridder_infinitescroll', 'msg', $translation_array );
 	
 	//compatibility with marketpress versions prior to 2.8

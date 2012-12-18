@@ -24,9 +24,6 @@ require_once dirname( __FILE__ ) . '/includes/customizer/functions.php';
 require_once dirname( __FILE__ ) . '/includes/customizer/output.php';
 
 function shoestrap_gridder_enqueue_resources() {
-  global $mp;
-  $view_mode = '';
-  $view_mode = $mp->get_setting('list_view');
 
   // Enqueue the styles
   wp_enqueue_style('shoestrap_gridder_styles', plugins_url('assets/css/style.css', __FILE__), false, null);
@@ -50,31 +47,7 @@ function shoestrap_gridder_enqueue_resources() {
 	$translation_array = array( 'text' => __( get_theme_mod('shoestrap_gridder_loading_text')) );
 	wp_localize_script( 'shoestrap_gridder_infinitescroll', 'msg', $translation_array );
 	
-	//compatibility with marketpress versions prior to 2.8
-  if ( $view_mode != 'grid' && $view_mode != 'list' ) {
-    $view_mode = 'grid';
-  }
-  
-  // Register the appropriate script if MarketPress is installed
-  if ( class_exists( 'MarketPress' ) && mp_is_shop_page() ) {
-    if ( $view_mode == 'list' ) {
-      wp_register_script('shoestrap_gridder_mp_script', plugins_url( 'assets/js/scripts-mp-list.js', __FILE__ ), false, null, false);
-    } else {
-      wp_register_script('shoestrap_gridder_mp_script', plugins_url( 'assets/js/scripts-mp-grid.js', __FILE__ ), false, null, false);
-    }
-  }
-  if ( class_exists( 'MarketPress' ) ) {
-    // if mp is installed and user IS viewing a store page, enqueue the marketpress script.
-    if ( !mp_is_shop_page() ) {
-      wp_enqueue_script('shoestrap_gridder_script');
-    // if mp is installed and user IS NOT viewing a store page, enqueue the default script.
-    } else {
-      wp_enqueue_script('shoestrap_gridder_mp_script');
-    }
-  // if mp is NOT installed enqueue the default script.
-  } else {
-    wp_enqueue_script('shoestrap_gridder_script');
-  }
+  wp_enqueue_script('shoestrap_gridder_script');
 }
 
 function shoestrap_gridder_enqueue_resources_checked() {
@@ -86,4 +59,3 @@ add_action( 'wp', 'shoestrap_gridder_enqueue_resources_checked' );
 
 // Load the plugin updater
 require_once dirname( __FILE__ ) . '/includes/updater/licencing.php';
-

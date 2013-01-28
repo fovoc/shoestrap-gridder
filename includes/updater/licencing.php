@@ -1,7 +1,7 @@
 <?php
 
-define( 'SHOESTRAP_GR_STORE_URL', 'http://bootstrap-commerce.com/downloads' );
-define( 'SHOESTRAP_GR_ITEM_NAME', 'Shoestrap GR Addon' );
+define( 'SHOESTRAP_GR_STORE_URL', 'http://shoestrap.org' );
+define( 'SHOESTRAP_GR_ITEM_NAME', 'Shoestrap Gridder Addon' );
 
 if( !class_exists( 'EDD_SL_Plugin_Updater' ) ) {
   // load our custom updater

@@ -29,15 +29,15 @@ function shoestrap_gridder_enqueue_resources() {
   wp_enqueue_style('shoestrap_gridder_styles', plugins_url('assets/css/style.css', __FILE__), false, null);
   
   // Infinite scroll jQuery Plugin
-  wp_register_script('shoestrap_gridder_infinitescroll', plugins_url( 'assets/js/jquery.infinitescroll.min.js', __FILE__ ), false, null, false);
+  wp_register_script('shoestrap_gridder_infinitescroll', plugins_url( 'assets/js/jquery.infinitescroll.min.js', __FILE__ ), false, null, true);
   wp_enqueue_script('shoestrap_gridder_infinitescroll');
 	
 	// Masonry jQuery Plugin
-  wp_register_script('shoestrap_gridder_masonry', plugins_url( 'assets/js/jquery.masonry.min.js', __FILE__ ), false, null, false);
+  wp_register_script('shoestrap_gridder_masonry', plugins_url( 'assets/js/jquery.masonry.min.js', __FILE__ ), false, null, true);
   wp_enqueue_script('shoestrap_gridder_masonry');
   
   // Plugin-specific script
-  wp_register_script('shoestrap_gridder_script', plugins_url( 'assets/js/scripts.js', __FILE__ ), false, null, false);
+  wp_register_script('shoestrap_gridder_script', plugins_url( 'assets/js/scripts.js', __FILE__ ), false, null, true);
 
   wp_localize_script( 'shoestrap_gridder_script', 'shoestrapScript', array(
     'loadingImg'    => 'http://i.imgur.com/6RMhx.gif',
@@ -52,7 +52,7 @@ function shoestrap_gridder_enqueue_resources() {
 
 function shoestrap_gridder_enqueue_resources_checked() {
   if ( !is_singular() ) {
-    add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 103);
+    add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 201);
   }
 }
 add_action( 'wp', 'shoestrap_gridder_enqueue_resources_checked' );

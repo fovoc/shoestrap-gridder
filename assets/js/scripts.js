@@ -7,9 +7,8 @@ jQuery(window).load(function() {
       columnWidth: function( containerWidth ) {
         return containerWidth / 12;
       },
-      // gutterWidth: 20,
       isResizable: true,
-      isAnimated: !Modernizr.csstransitions
+      isAnimated: Modernizr.csstransitions
   });
 	
   $container.infinitescroll({

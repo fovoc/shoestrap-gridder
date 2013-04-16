@@ -1,33 +1,36 @@
-jQuery(window).load(function() {
-  var $container = $('#main');
-  
-    $container.masonry({
+// Using jQuery.noConflict
+var $j = jQuery.noConflict();
 
-      itemSelector: '.entry',
-      columnWidth: function( containerWidth ) {
-        return containerWidth / 12;
-      },
-      isResizable: true,
-      isAnimated: Modernizr.csstransitions
+$j(window).load(function(){
+  
+  var container = $j('#main');
+  
+  $j(container).masonry({
+    itemSelector: '.entry',
+    columnWidth: function( containerWidth ) {
+      return containerWidth / 12;
+    },
+    isResizable: true,
+    isAnimated: Modernizr.csstransitions
   });
-	
-  $container.infinitescroll({
+  
+  $j(container).infinitescroll({
     navSelector  : '#post-nav',    // selector for the paged navigation
     nextSelector : '#post-nav .previous a',  // selector for the NEXT link (to page 2)
     itemSelector : '.entry',     // selector for all items you'll retrieve
-	    loading: {
-	        finishedMsg: shoestrapScript.end,
-	      }
+      loading: {
+          finishedMsg: shoestrapScript.end,
+        }
     },
     // trigger Masonry as a callback
     function( newElements ) {
       // hide new items while they are loading
-      var $newElems = $( newElements ).css({ opacity: 0 });
+      var newElems = $j( newElements ).css({ opacity: 0 });
       // ensure that images load before adding to masonry layout
-      $newElems.imagesLoaded(function(){
+      $j(newElems).imagesLoaded(function(){
         // show elems now they're ready
-        $newElems.animate({ opacity: 1 });
-        $container.masonry( 'appended', $newElems, true );
+        $j(newElems).animate({ opacity: 1 });
+        $j(container).masonry( 'appended', $j(newElems), true );
       });
     }
   );

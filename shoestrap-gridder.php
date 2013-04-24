@@ -40,11 +40,11 @@ function shoestrap_gridder_enqueue_resources() {
   wp_register_script('shoestrap_gridder_script', plugins_url( 'assets/js/scripts.js', __FILE__ ), false, null, true);
 
   wp_localize_script( 'shoestrap_gridder_script', 'shoestrapScript', array(
-    'loadingImg'    => 'http://i.imgur.com/6RMhx.gif',
-    'end' 					=> __( get_theme_mod('shoestrap_gridder_end_text'))
+    'loadingImg'    => '/assets/images/empty.gif',
+    'end' 					=> '<div class="progress progress-danger progress-striped active" style="width:220px;margin-bottom:0px;"><div class="bar" style="width: 100%;">'.__( get_theme_mod('shoestrap_gridder_end_text')).'</div></div>'
   ) );
 
-	$translation_array = array( 'text' => __( get_theme_mod('shoestrap_gridder_loading_text')) );
+	$translation_array = array( 'text' => '<div class="progress progress-info progress-striped active" style="width:220px;margin-bottom:0px;"><div class="bar" style="width: 100%;">'.__( get_theme_mod('shoestrap_gridder_loading_text')).'</div></div>' );
 	wp_localize_script( 'shoestrap_gridder_infinitescroll', 'msg', $translation_array );
 	
   wp_enqueue_script('shoestrap_gridder_script');

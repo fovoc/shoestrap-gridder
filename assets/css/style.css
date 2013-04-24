@@ -58,14 +58,18 @@
   bottom: 30px;
   left: 50%;
   width: 220px;
-  height: 41px;
-  padding-top: 9px;
+  height: auto;
+  padding-top: 0px;
   margin-left: -25px;
   z-index: 100;
-  background: #fff;
+  background: transparent ;
   overflow: hidden;
-
+  
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
+}
+
+#infscr-loading img {
+  display: none;  
 }

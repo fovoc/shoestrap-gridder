@@ -64,10 +64,6 @@
   z-index: 100;
   background: transparent ;
   overflow: hidden;
-  
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
 }
 
 #infscr-loading img {

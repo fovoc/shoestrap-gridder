@@ -1,6 +1,7 @@
 <?php
 $excerpt_visibility           = get_theme_mod( 'shoestrap_gridder_show_text_in_lists' );
 $shoestrap_gridder_post_class = shoestrap_gridder_posts_column( false );
+if ( !isset( $shoestrap_gridder_post_class ) ) { $shoestrap_gridder_post_class = 'normal' }
 $columns                      = get_theme_mod( 'shoestrap_gridder_posts_columns' );
 $list_title_size              = get_theme_mod( 'shoestrap_gridder_list_title_size' );
 

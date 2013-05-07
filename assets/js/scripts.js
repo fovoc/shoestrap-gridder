@@ -15,8 +15,8 @@ $j(window).load(function(){
   });
   
   $j(container).infinitescroll({
-    navSelector  : '#post-nav',    // selector for the paged navigation
-    nextSelector : '#post-nav .previous a',  // selector for the NEXT link (to page 2)
+    navSelector  : '.post-nav .pager',    // selector for the paged navigation
+    nextSelector : '.post-nav .pager .previous a',  // selector for the NEXT link (to page 2)
     itemSelector : '.entry',     // selector for all items you'll retrieve
       loading: {
           finishedMsg: shoestrapScript.end,

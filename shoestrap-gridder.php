@@ -26,7 +26,7 @@ function shoestrap_gridder_enqueue_resources() {
   wp_enqueue_script('shoestrap_gridder_infinitescroll');
 
 	// Masonry jQuery Plugin
-  wp_register_script('shoestrap_gridder_masonry', plugins_url( 'assets/js/jquery.masonry.js', __FILE__ ), false, null, true);
+  wp_register_script('shoestrap_gridder_masonry', plugins_url( 'assets/js/jquery.masonry.min.js', __FILE__ ), false, null, true);
   wp_enqueue_script('shoestrap_gridder_masonry');
   
   // Plugin-specific script

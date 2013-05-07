@@ -34,10 +34,10 @@ function shoestrap_gridder_enqueue_resources() {
 
   wp_localize_script( 'shoestrap_gridder_script', 'shoestrapScript', array(
     'loadingImg'    => '/assets/images/empty.gif',
-    'end' 					=> '<div class="progress progress-danger progress-striped active" style="width:220px;margin-bottom:0px;"><div class="bar" style="width: 100%;">'.__( get_theme_mod('shoestrap_gridder_end_text')).'</div></div>'
+    'end' 					=> '<div class="progress '.__( get_theme_mod('shoestrap_gridder_end_color')).' progress-striped active" style="width:220px;margin-bottom:0px;"><div class="bar" style="width: 100%;">'.__( get_theme_mod('shoestrap_gridder_end_text')).'</div></div>'
   ) );
 
-	$translation_array = array( 'text' => '<div class="progress progress-info progress-striped active" style="width:220px;margin-bottom:0px;"><div class="bar" style="width: 100%;">'.__( get_theme_mod('shoestrap_gridder_loading_text')).'</div></div>' );
+	$translation_array = array( 'text' => '<div class="progress '.__( get_theme_mod('shoestrap_gridder_loading_color')).' progress-striped active" style="width:220px;margin-bottom:0px;"><div class="bar" style="width: 100%;">'.__( get_theme_mod('shoestrap_gridder_loading_text')).'</div></div>' );
 	wp_localize_script( 'shoestrap_gridder_infinitescroll', 'msg', $translation_array );
 	
   wp_enqueue_script('shoestrap_gridder_script');

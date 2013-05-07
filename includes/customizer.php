@@ -13,7 +13,9 @@ function shoestrap_gridder_customizer( $wp_customize ) {
   $settings[] = array( 'slug'=> 'shoestrap_gridder_posts_columns',      'default' => '3');
   $settings[] = array( 'slug'=> 'shoestrap_gridder_list_title_size',    'default' => 'h3');
   $settings[] = array( 'slug'=> 'shoestrap_gridder_loading_text',       'default' => 'Loading...');
+  $settings[] = array( 'slug'=> 'shoestrap_gridder_loading_color',      'default' => 'progress-info');
   $settings[] = array( 'slug'=> 'shoestrap_gridder_end_text',           'default' => 'End of list');
+  $settings[] = array( 'slug'=> 'shoestrap_gridder_end_color',          'default' => 'progress-danger');
 
   foreach($settings as $setting){
     $wp_customize->add_setting( $setting['slug'], array( 'default' => $setting['default'], 'type' => 'theme_mod', 'capability' => 'edit_theme_options' ));
@@ -75,11 +77,39 @@ function shoestrap_gridder_customizer( $wp_customize ) {
     'type'        => 'text'
   ));
 
+  $wp_customize->add_control( 'shoestrap_gridder_loading_color', array(
+    'label'       => __( 'Color of loading progress bar', 'shoestrap_gridder' ),
+    'section'     => 'shoestrap_gridder',
+    'settings'    => 'shoestrap_gridder_loading_color',
+    'type'        => 'select',
+    //'priority'    => 1,
+    'choices'     => array(
+      'progress-info'      => 'info',
+      'progress-success'   => 'success',
+      'progress-warning'   => 'warning',
+      'progress-danger'    => 'danger',
+    ),
+  ));
+
   $wp_customize->add_control( 'shoestrap_gridder_end_text', array(
     'label'       => __( 'Message for Ending', 'shoestrap_gridder' ),
     'section'     => 'shoestrap_gridder',
     'settings'    => 'shoestrap_gridder_end_text',
     'type'        => 'text'
+  ));
+
+  $wp_customize->add_control( 'shoestrap_gridder_end_color', array(
+    'label'       => __( 'Color of end progress bar', 'shoestrap_gridder' ),
+    'section'     => 'shoestrap_gridder',
+    'settings'    => 'shoestrap_gridder_end_color',
+    'type'        => 'select',
+    //'priority'    => 1,
+    'choices'     => array(
+      'progress-info'      => 'info',
+      'progress-success'   => 'success',
+      'progress-warning'   => 'warning',
+      'progress-danger'    => 'danger',
+    ),
   ));
 
 }

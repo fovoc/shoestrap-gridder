@@ -51,7 +51,7 @@
   max-width: 100%;
   height:auto;
 }
-
+/*
 #infscr-loading {
   position: fixed;
   text-align: center;
@@ -65,7 +65,7 @@
   background: transparent ;
   overflow: hidden;
 }
-
+*/
 #infscr-loading img {
   display: none;  
 }

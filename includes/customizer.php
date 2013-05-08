@@ -39,7 +39,7 @@ function shoestrap_gridder_customizer( $wp_customize ) {
   ));
   
   $wp_customize->add_control( 'shoestrap_gridder_posts_columns', array(
-    'label'       => __( '"Slide" width', 'shoestrap_gridder' ),
+    'label'       => __( 'Item width', 'shoestrap_gridder' ),
     'section'     => 'shoestrap_gridder',
     'settings'    => 'shoestrap_gridder_posts_columns',
     'type'        => 'select',
@@ -52,7 +52,7 @@ function shoestrap_gridder_customizer( $wp_customize ) {
   ));
   
   $wp_customize->add_control( 'shoestrap_gridder_list_title_size', array(
-    'label'       => __( 'Size of list titles', 'shoestrap_gridder' ),
+    'label'       => __( 'List titles type', 'shoestrap_gridder' ),
     'section'     => 'shoestrap_gridder',
     'settings'    => 'shoestrap_gridder_list_title_size',
     'type'        => 'select',
@@ -64,14 +64,14 @@ function shoestrap_gridder_customizer( $wp_customize ) {
   ));
   
   $wp_customize->add_control( 'posts_per_page', array(
-    'label'       => __( 'Products Per Page', 'shoestrap_gridder' ),
+    'label'       => __( 'Posts Per Page', 'shoestrap_gridder' ),
     'section'     => 'shoestrap_gridder',
     'settings'    => 'posts_per_page',
     'type'        => 'text'
   ));
   
   $wp_customize->add_control( 'shoestrap_gridder_loading_text', array(
-    'label'       => __( 'Message for loading', 'shoestrap_gridder' ),
+    'label'       => __( '"loading" message', 'shoestrap_gridder' ),
     'section'     => 'shoestrap_gridder',
     'settings'    => 'shoestrap_gridder_loading_text',
     'type'        => 'text'
@@ -84,31 +84,31 @@ function shoestrap_gridder_customizer( $wp_customize ) {
     'type'        => 'select',
     //'priority'    => 1,
     'choices'     => array(
-      'progress-info'      => 'info',
-      'progress-success'   => 'success',
-      'progress-warning'   => 'warning',
-      'progress-danger'    => 'danger',
+      'progress-info'      => 'Light Blue',
+      'progress-success'   => 'Green',
+      'progress-warning'   => 'Orange',
+      'progress-danger'    => 'Red',
     ),
   ));
 
   $wp_customize->add_control( 'shoestrap_gridder_end_text', array(
-    'label'       => __( 'Message for Ending', 'shoestrap_gridder' ),
+    'label'       => __( '"End of List" Message', 'shoestrap_gridder' ),
     'section'     => 'shoestrap_gridder',
     'settings'    => 'shoestrap_gridder_end_text',
     'type'        => 'text'
   ));
 
   $wp_customize->add_control( 'shoestrap_gridder_end_color', array(
-    'label'       => __( 'Color of end progress bar', 'shoestrap_gridder' ),
+    'label'       => __( 'Colr of loading bar on the end of the list', 'shoestrap_gridder' ),
     'section'     => 'shoestrap_gridder',
     'settings'    => 'shoestrap_gridder_end_color',
     'type'        => 'select',
     //'priority'    => 1,
     'choices'     => array(
-      'progress-info'      => 'info',
-      'progress-success'   => 'success',
-      'progress-warning'   => 'warning',
-      'progress-danger'    => 'danger',
+      'progress-info'      => 'Light Blue',
+      'progress-success'   => 'Green',
+      'progress-warning'   => 'Orange',
+      'progress-danger'    => 'Red',
     ),
   ));
 
@@ -117,7 +117,7 @@ add_action( 'customize_register', 'shoestrap_gridder_customizer' );
 
 function shoestrap_gridder_posts_column( $echo = true ) {
   
-  $class = get_theme_mod( 'shoestrap_gridder_posts_columns' );
+  $class = get_theme_mod( 'shoestrap_gridder_posts_columns', 'normal' );
   
   if ( $echo == true ) {
     echo $class;

@@ -63,10 +63,6 @@ function shoestrap_gridder_template_mods() {
   $list_title_size              = get_theme_mod( 'shoestrap_gridder_list_title_size' );
   $responsive                   = get_theme_mod( 'shoestrap_responsive' );
 
-  // Set 'normal' as the default gridder post class if it is not defined
-  if ( !isset( $shoestrap_gridder_post_class ) )
-    $shoestrap_gridder_post_class = 'normal';
-
   // Set the layout class (fixed/responsive)
   if ( $responsive == '0' )
     $layout = 'fixed';
@@ -104,3 +100,14 @@ function shoestrap_gridder_template_mods_actions() {
   add_action( 'shoestrap_article_content', 'shoestrap_gridder_template_mods', 10 );
 }
 add_action( 'shoestrap_article_content', 'shoestrap_gridder_template_mods_actions', 1 );
+
+function shoestrap_gridder_open_wrapper_div() {
+  echo '<div class="wrapperdiv">';
+}
+add_action( 'shoestrap_index_begin', 'shoestrap_gridder_open_wrapper_div', 10 );
+
+function shoestrap_gridder_close_wrapper_div() {
+  echo '</div>';
+}
+add_action( 'shoestrap_index_end', 'shoestrap_gridder_close_wrapper_div', 10 );
+

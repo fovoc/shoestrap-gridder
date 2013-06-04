@@ -3,7 +3,7 @@ var $j = jQuery.noConflict();
 
 $j(window).load(function(){
   
-  var container = $j('#main .wrapperdiv');
+  var container = $j('.main .wrapperdiv');
   
   $j(container).masonry({
     itemSelector: '.entry',

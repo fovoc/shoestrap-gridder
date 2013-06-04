@@ -1,6 +1,8 @@
-#main .articles{
+.main article{
   clear: both;
   float: none;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .entry{
@@ -42,7 +44,7 @@
   .span6 .entry.wide.fixed{ width: 96%; }
 }
 
-#post-nav{
+.post-nav{
   clear: both;
   float: none;
 }
@@ -51,7 +53,7 @@
   max-width: 100%;
   height:auto;
 }
-/*
+
 #infscr-loading {
   position: fixed;
   text-align: center;
@@ -65,7 +67,12 @@
   background: transparent ;
   overflow: hidden;
 }
-*/
+
 #infscr-loading img {
   display: none;  
+}
+
+.gridder_bar_text {
+  position: relative;
+  top: 2px;
 }

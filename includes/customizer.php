@@ -1,123 +1,131 @@
 <?php
 
-function shoestrap_gridder_customizer( $wp_customize ) {
-  
-  $sections = array();
-  $sections[] = array( 'slug'=>'shoestrap_gridder', 'title' => __('Gridder', 'shoestrap_gridder'), 'priority' => 15);
+/*
+ * The Gridder core options
+ */
+if ( !function_exists( 'shoestrap_gridder_module_options' ) ) {
+  function shoestrap_gridder_module_options() {
 
-  foreach($sections as $section){
-    $wp_customize->add_section( $section['slug'], array( 'title' => $section['title'], 'priority' => $section['priority']));
+  /*-----------------------------------------------------------------------------------*/
+  /* The Options Array */
+  /*-----------------------------------------------------------------------------------*/
+
+  // Set the Options Array
+  global $of_options, $smof_details;
+
+  // Gridder Options
+  $of_options[] = array(
+    "name"      => __("Gridder Options", "shoestrap"),
+    "type"      => "heading"
+  );
+
+  $of_options[] = array(
+    "name"      => "",
+    "desc"      => "",
+    "id"        => "shoestrap_gridder_info",
+    "std"       => "<h3 style=\"margin: 0 0 10px;\">Gridder Options</h3>
+                    <p>Here you change options considering the Shoestrap Gridder plugin.</p><p><strong>Notice: </strong>In order to control the flow of incoming posts through the infinite scroll plugin, you can do so under <i>Setting->Reading->Blog pages show at most<i>.</p>",
+    "icon"      => true,
+    "type"      => "info"
+  );
+
+  $of_options[] = array(
+      "name"      => __("Show text in lists", "shoestrap"),
+      "id"        => "shoestrap_gridder_show_text_in_lists",
+      "std"       => 1,
+      "on"        => __("Show", "shoestrap"),
+      "off"       => __("Hide", "shoestrap"),
+      "type"      => "switch"
+    );
+
+  $of_options[] = array(
+      "name"      => __("Select list title size", "shoestrap"),
+      "id"        => "shoestrap_gridder_list_title_size",
+      "std"       => 1,
+      "on"        => __("h3", "shoestrap"),
+      "off"       => __("h4", "shoestrap"),
+      "type"      => "switch",
+    );
+
+  $of_options[] = array(
+      "name"      => __("Loading text", "shoestrap"),
+      "desc"      => __("The text inside the progress bar as next set is loading.", "shoestrap"),
+      "id"        => "shoestrap_gridder_loading_text",
+      "std"       => "Loading...",
+      "type"      => "text",
+    );
+
+  $of_options[] = array(
+      "name"      => __("End text", "shoestrap"),
+      "desc"      => __("The text inside the progress bar when no more posts are available.", "shoestrap"),
+      "id"        => "shoestrap_gridder_end_text",
+      "std"       => "End of list",
+      "type"      => "text",
+    );
+
+  $of_options[] = array(
+      "name"      => __("Loading progress bar color", "shoestrap"),
+      "desc"      => __("Select the color of progress bar as next set is loading.", "shoestrap"),
+      "id"        => "shoestrap_gridder_loading_color",
+      "std"       => "info",
+      "type"      => "select",
+      "options"   => array(
+        "info"      => "info",
+        "success"   => "success",
+        "warning"   => "warning",
+        "danger"    => "danger",
+      )
+    );
+
+  $of_options[] = array(
+      "name"      => __("End progress bar color", "shoestrap"),
+      "desc"      => __("Select the color of progress bar when no more posts are available.", "shoestrap"),
+      "id"        => "shoestrap_gridder_end_color",
+      "std"       => "success",
+      "type"      => "select",
+      "options"   => array(
+        "info"      => "info",
+        "success"   => "success",
+        "warning"   => "warning",
+        "danger"    => "danger",
+      )
+    );
+
+  $of_options[] = array(
+      "name"      => __("Post width", "shoestrap"),
+      "desc"      => __("Select the width of a single post. This eventually changes the number of columns.", "shoestrap"),
+      "id"        => "shoestrap_gridder_posts_columns",
+      "std"       => "normal",
+      "type"      => "select",
+      "options"   => array(
+        "narrow"    => "narrow",
+        "normal"    => "normal",
+        "wide"      => "wide",
+      )
+    );
+
+  $of_options[] = array(
+      "name"      => __("Show entry metadata", "shoestrap"),
+      "desc"      => __("Enable this option to show the entry metadata of posts. Default: OFF.", "shoestrap"),
+      "id"        => "entry_meta",
+      "std"       => 0,
+      "type"      => "switch"
+    );
+
+  do_action( 'shoestrap_gridder_module_options_modifier' );
+
+  $smof_details = array();
+    foreach( $of_options as $option ) {
+      $smof_details[$option['id']] = $option;
+    }
   }
-  $settings = array();
-  $settings[] = array( 'slug'=> 'shoestrap_gridder_show_text_in_lists', 'default' => 'show');
-  $settings[] = array( 'slug'=> 'shoestrap_gridder_posts_columns',      'default' => '3');
-  $settings[] = array( 'slug'=> 'shoestrap_gridder_list_title_size',    'default' => 'h3');
-  $settings[] = array( 'slug'=> 'shoestrap_gridder_loading_text',       'default' => 'Loading...');
-  $settings[] = array( 'slug'=> 'shoestrap_gridder_loading_color',      'default' => 'progress-info');
-  $settings[] = array( 'slug'=> 'shoestrap_gridder_end_text',           'default' => 'End of list');
-  $settings[] = array( 'slug'=> 'shoestrap_gridder_end_color',          'default' => 'progress-danger');
-
-  foreach($settings as $setting){
-    $wp_customize->add_setting( $setting['slug'], array( 'default' => $setting['default'], 'type' => 'theme_mod', 'capability' => 'edit_theme_options' ));
-  }
-  $wp_customize->add_setting( 'posts_per_page', array(
-    'default'        => '12',
-    'type'           => 'option',
-    'capability'     => 'manage_options',
-) );
-  
-  $wp_customize->add_control( 'shoestrap_gridder_show_text_in_lists', array(
-    'label'       => __( 'Show post content in lists', 'shoestrap_gridder' ),
-    'section'     => 'shoestrap_gridder',
-    'settings'    => 'shoestrap_gridder_show_text_in_lists',
-    'type'        => 'select',
-    'priority'    => 1,
-    'choices'     => array(
-      'show'      => __('Show', 'shoestrap_gridder'),
-      'hide'      => __('Hide', 'shoestrap_gridder'),
-    ),
-  ));
-  
-  $wp_customize->add_control( 'shoestrap_gridder_posts_columns', array(
-    'label'       => __( 'Item width', 'shoestrap_gridder' ),
-    'section'     => 'shoestrap_gridder',
-    'settings'    => 'shoestrap_gridder_posts_columns',
-    'type'        => 'select',
-    'priority'    => 1,
-    'choices'     => array(
-      'narrow'    => 'Narrow',
-      'normal'    => 'Normal',
-      'wide'      => 'Wide',
-    ),
-  ));
-  
-  $wp_customize->add_control( 'shoestrap_gridder_list_title_size', array(
-    'label'       => __( 'List titles type', 'shoestrap_gridder' ),
-    'section'     => 'shoestrap_gridder',
-    'settings'    => 'shoestrap_gridder_list_title_size',
-    'type'        => 'select',
-    'priority'    => 1,
-    'choices'     => array(
-      'h3'        => 'h3',
-      'h4'        => 'h4',
-    ),
-  ));
-  
-  $wp_customize->add_control( 'posts_per_page', array(
-    'label'       => __( 'Posts Per Page', 'shoestrap_gridder' ),
-    'section'     => 'shoestrap_gridder',
-    'settings'    => 'posts_per_page',
-    'type'        => 'text'
-  ));
-  
-  $wp_customize->add_control( 'shoestrap_gridder_loading_text', array(
-    'label'       => __( '"loading" message', 'shoestrap_gridder' ),
-    'section'     => 'shoestrap_gridder',
-    'settings'    => 'shoestrap_gridder_loading_text',
-    'type'        => 'text'
-  ));
-
-  $wp_customize->add_control( 'shoestrap_gridder_loading_color', array(
-    'label'       => __( 'Color of loading progress bar', 'shoestrap_gridder' ),
-    'section'     => 'shoestrap_gridder',
-    'settings'    => 'shoestrap_gridder_loading_color',
-    'type'        => 'select',
-    //'priority'    => 1,
-    'choices'     => array(
-      'progress-info'      => 'Light Blue',
-      'progress-success'   => 'Green',
-      'progress-warning'   => 'Orange',
-      'progress-danger'    => 'Red',
-    ),
-  ));
-
-  $wp_customize->add_control( 'shoestrap_gridder_end_text', array(
-    'label'       => __( '"End of List" Message', 'shoestrap_gridder' ),
-    'section'     => 'shoestrap_gridder',
-    'settings'    => 'shoestrap_gridder_end_text',
-    'type'        => 'text'
-  ));
-
-  $wp_customize->add_control( 'shoestrap_gridder_end_color', array(
-    'label'       => __( 'Colr of loading bar on the end of the list', 'shoestrap_gridder' ),
-    'section'     => 'shoestrap_gridder',
-    'settings'    => 'shoestrap_gridder_end_color',
-    'type'        => 'select',
-    //'priority'    => 1,
-    'choices'     => array(
-      'progress-info'      => 'Light Blue',
-      'progress-success'   => 'Green',
-      'progress-warning'   => 'Orange',
-      'progress-danger'    => 'Red',
-    ),
-  ));
 
 }
-add_action( 'customize_register', 'shoestrap_gridder_customizer' );
+add_action( 'init','shoestrap_gridder_module_options', 55 );
 
 function shoestrap_gridder_posts_column( $echo = true ) {
   
-  $class = get_theme_mod( 'shoestrap_gridder_posts_columns', 'normal' );
+  $class = shoestrap_getVariable( 'shoestrap_gridder_posts_columns', 'normal' );
   
   if ( $echo == true ) {
     echo $class;
@@ -126,9 +134,9 @@ function shoestrap_gridder_posts_column( $echo = true ) {
   }
 }
 
-function shoestrap_gridder_customizer_output() {
+function shoestrap_gridder_output() {
   
-  $background_color = get_theme_mod( 'shoestrap_background_color' );
+  $background_color = shoestrap_getVariable( 'color_body_bg' );
   $background_color = '#' . str_replace( '#', '', $background_color );
   ?>
   <style>
@@ -144,4 +152,4 @@ function shoestrap_gridder_customizer_output() {
   </style>
 
 <?php }
-add_action( 'wp_head', 'shoestrap_gridder_customizer_output' );
+add_action( 'wp_head', 'shoestrap_gridder_output' );

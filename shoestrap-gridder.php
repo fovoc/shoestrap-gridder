@@ -34,10 +34,10 @@ function shoestrap_gridder_enqueue_resources() {
 
   wp_localize_script( 'shoestrap_gridder_script', 'shoestrapScript', array(
     'loadingImg'    => '/assets/images/empty.gif',
-    'end' 					=> '<div class="progress '.__( get_theme_mod('shoestrap_gridder_end_color')).' progress-striped active" style="width:220px;margin-bottom:0px;"><div class="bar" style="width: 100%;">'.__( get_theme_mod('shoestrap_gridder_end_text')).'</div></div>'
+    'end' 					=> '<div class="progress progress-striped active" style="width:220px;margin-bottom:0px;"><div class="progress-bar progress-bar-'.__( shoestrap_getVariable('shoestrap_gridder_end_color')).'" style="width: 100%;"><span class="gridder_bar_text">'.__( shoestrap_getVariable('shoestrap_gridder_end_text')).'<span></div></div>'
   ) );
 
-	$translation_array = array( 'text' => '<div class="progress '.__( get_theme_mod('shoestrap_gridder_loading_color')).' progress-striped active" style="width:220px;margin-bottom:0px;"><div class="bar" style="width: 100%;">'.__( get_theme_mod('shoestrap_gridder_loading_text')).'</div></div>' );
+	$translation_array = array( 'text' => '<div class="progress progress-striped active" style="width:220px;margin-bottom:0px;"><div class="progress-bar progress-bar-'.__( shoestrap_getVariable('shoestrap_gridder_loading_color')).'" style="width: 100%;"><span class="gridder_bar_text">'.__( shoestrap_getVariable('shoestrap_gridder_loading_text')).'</span></div></div>' );
 	wp_localize_script( 'shoestrap_gridder_infinitescroll', 'msg', $translation_array );
 	
   wp_enqueue_script('shoestrap_gridder_script');
@@ -57,22 +57,29 @@ add_action( 'wp', 'shoestrap_gridder_enqueue_resources_checked' );
  * The template modifications for posts on archives
  */
 function shoestrap_gridder_template_mods() {
-  $excerpt_visibility           = get_theme_mod( 'shoestrap_gridder_show_text_in_lists' );
+  $excerpt_visibility           = shoestrap_getVariable( 'shoestrap_gridder_show_text_in_lists' );
   $shoestrap_gridder_post_class = shoestrap_gridder_posts_column( false );
-  $columns                      = get_theme_mod( 'shoestrap_gridder_posts_columns' );
-  $list_title_size              = get_theme_mod( 'shoestrap_gridder_list_title_size' );
-  $responsive                   = get_theme_mod( 'shoestrap_responsive' );
+  $columns                      = shoestrap_getVariable( 'shoestrap_gridder_posts_columns' );
+  $list_title_size              = shoestrap_getVariable( 'shoestrap_gridder_list_title_size' );
+  $responsive                   = shoestrap_getVariable( 'site_style' );
+  $entry_meta                   = shoestrap_getVariable( 'entry_meta' );
 
   // Set the layout class (fixed/responsive)
-  if ( $responsive == '0' )
+  if ( $responsive != 'fluid' )
     $layout = 'fixed';
   else
     $layout = 'responsive';
+  
+  // Set the heading size
+  if ( $list_title_size == 1 )
+    $heading = 'h3';
+  else
+    $heading = 'h4';
   ?>
 
   <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_gridder_post_class . ' entry ' . $layout ); ?>>
     <header>
-      <<?php echo $list_title_size; ?>><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></<?php echo $list_title_size; ?>>
+      <<?php echo $heading; ?>><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></<?php echo $heading; ?>>
     </header>
     <div class="entry-content">
       <?php if (has_post_thumbnail()) { ?>
@@ -81,12 +88,14 @@ function shoestrap_gridder_template_mods() {
         </div>
       <?php }?>
 
-      <?php if ( $excerpt_visibility != 'hide' )
+      <?php if ( $excerpt_visibility == 1 )
         the_excerpt();
       ?>
     </div>
     <footer>
-      <?php the_tags('<ul class="entry-tags"><li>','</li><li>','</li></ul>'); ?>
+    <?php if ( $entry_meta == 1 ) 
+      get_template_part('templates/entry-meta');
+    ?>
     </footer>
   </article>
   <?php

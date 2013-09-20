@@ -34,6 +34,19 @@ function shoestrap_module_gridder_options( $sections ) {
   );
 
   $fields[] = array( 
+    'title'     => __( 'Select between box styles', 'shoestrap' ),
+    'desc'      => __( 'Select between box styles.', 'shoestrap' ),
+    'id'        => 'shoestrap_gridder_box_style',
+    'type'      => 'button_set',
+    'options'   => array(
+      ' '                   => 'Default',
+      'well'                => 'Well',
+      'panel panel-default' => 'Panel'
+    ),
+    'default' => ' '
+  );
+
+  $fields[] = array( 
     'title'     => __( 'Loading text', 'shoestrap' ),
     'desc'      => __( 'The text inside the progress bar as next set is loading.', 'shoestrap' ),
     'id'        => 'shoestrap_gridder_loading_text',

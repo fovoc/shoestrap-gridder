@@ -63,6 +63,7 @@ function shoestrap_gridder_template_mods() {
   $list_title_size              = shoestrap_getVariable( 'shoestrap_gridder_list_title_size' );
   $responsive                   = shoestrap_getVariable( 'site_style' );
   $entry_meta                   = shoestrap_getVariable( 'entry_meta' );
+  $box_style                    = shoestrap_getVariable( 'shoestrap_gridder_box_style' );
 
   // Set the layout class (fixed/responsive)
   if ( $responsive != 'fluid' )
@@ -77,7 +78,7 @@ function shoestrap_gridder_template_mods() {
     $heading = 'h4';
   ?>
 
-  <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_gridder_post_class . ' entry ' . $layout ); ?>>
+  <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_gridder_post_class . ' entry '. $box_style .' '. $layout ); ?>>
     <header>
       <<?php echo $heading; ?>><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></<?php echo $heading; ?>>
     </header>

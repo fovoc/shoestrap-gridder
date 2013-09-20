@@ -10,8 +10,8 @@ Author URI: http://aristeides.com
 
 add_image_size( 'shoestrap-gridder-grid', 350 );
 
-require_once dirname( __FILE__ ) . '/includes/licencing.php';
-require_once dirname( __FILE__ ) . '/includes/customizer.php';
+// require_once dirname( __FILE__ ) . '/includes/licencing.php';
+require_once dirname( __FILE__ ) . '/includes/load.module.html';
 
 /*
  * Enqueue the necessary javascript and css resources
@@ -105,10 +105,10 @@ function shoestrap_gridder_template_mods() {
  * Use our custom template instead of the default
  */
 function shoestrap_gridder_template_mods_actions() {
-  remove_action( 'shoestrap_article_content', 'shoestrap_article_content_action', 10 );
-  add_action( 'shoestrap_article_content', 'shoestrap_gridder_template_mods', 10 );
+  remove_action( 'shoestrap_content_override', 'shoestrap_content_single_override', 10 );
+  add_action( 'shoestrap_content_override', 'shoestrap_gridder_template_mods', 10 );
 }
-add_action( 'shoestrap_article_content', 'shoestrap_gridder_template_mods_actions', 1 );
+add_action( 'shoestrap_content_override', 'shoestrap_gridder_template_mods_actions', 1 );
 
 function shoestrap_gridder_open_wrapper_div() {
   echo '<div class="wrapperdiv">';

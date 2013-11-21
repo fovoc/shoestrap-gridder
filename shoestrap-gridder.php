@@ -9,7 +9,7 @@ Author URI: http://aristeides.com
 */
 
 require_once get_template_directory() . '/lib/modules/core.redux/module.php';
-require_once dirname( __FILE__ ) . '/includes/module.php';
+require_once dirname( __FILE__ ) . '/includes/admin.php';
 
 /*
  * Enqueue the necessary javascript and css resources

@@ -1,5 +1,7 @@
 <?php
 
+require_once get_template_directory() . '/lib/modules/core.redux/module.php';
+
 /*
  * Gridder Addon options
  */

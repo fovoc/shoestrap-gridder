@@ -8,10 +8,8 @@ Author: Aristeides Stathopoulos
 Author URI: http://aristeides.com
 */
 
-add_image_size( 'shoestrap-gridder-grid', 350 );
-
-// require_once dirname( __FILE__ ) . '/includes/licencing.php';
-require_once dirname( __FILE__ ) . '/includes/load.module.html';
+require_once get_template_directory() . '/lib/modules/core.redux/module.php';
+require_once dirname( __FILE__ ) . '/includes/module.php';
 
 /*
  * Enqueue the necessary javascript and css resources

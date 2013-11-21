@@ -1,6 +1,5 @@
 <?php
 
-require_once get_template_directory() . '/lib/modules/core.redux/module.php';
 
 /*
  * Gridder Addon options
@@ -10,7 +9,7 @@ function shoestrap_module_gridder_options( $sections ) {
 
   $section = array(
     'title' => __( 'Gridder', 'shoestrap' ),
-    'icon'  => 'elusive icon-asl icon-large'
+    'icon'  => 'el-icon-th icon-large'
   );
 
   $fields[] = array( 
@@ -128,6 +127,4 @@ function shoestrap_module_gridder_options( $sections ) {
   return $sections;
 }
 endif;
-add_filter( 'redux-sections-'.REDUX_OPT_NAME, 'shoestrap_module_gridder_options', 1 );   
-
-include_once( dirname( __FILE__ ) . '/functions.gridder.php' );
+add_filter( 'redux-sections-'.REDUX_OPT_NAME, 'shoestrap_module_gridder_options', 1 );

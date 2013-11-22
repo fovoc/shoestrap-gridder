@@ -21,6 +21,22 @@ function shoestrap_module_gridder_options( $sections ) {
   );
 
   $fields[] = array( 
+    'title'     => __( 'Enable Masonry', 'shoestrap' ),
+    'desc'      => __( 'Default: On.', 'shoestrap' ),
+    'id'        => 'shoestrap_gridder_masorny',
+    'default'   => 1,
+    'type'      => 'switch'
+  );
+
+  $fields[] = array( 
+    'title'     => __( 'Use customized templates', 'shoestrap' ),
+    'desc'      => __( 'Default: Off.', 'shoestrap' ),
+    'id'        => 'shoestrap_gridder_override_templates',
+    'default'   => 0,
+    'type'      => 'switch'
+  );
+
+  $fields[] = array( 
     'title'     => __( 'Show text in lists', 'shoestrap' ),
     'desc'      => __( 'Default: On.', 'shoestrap' ),
     'id'        => 'shoestrap_gridder_show_text_in_lists',

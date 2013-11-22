@@ -13,6 +13,14 @@ function shoestrap_module_gridder_options( $sections ) {
   );
 
   $fields[] = array( 
+    'title'     => __( 'Enable Infinite Scroll', 'shoestrap' ),
+    'desc'      => __( 'Default: On.', 'shoestrap' ),
+    'id'        => 'shoestrap_gridder_infinite_scroll',
+    'default'   => 1,
+    'type'      => 'switch'
+  );
+
+  $fields[] = array( 
     'title'     => __( 'Show text in lists', 'shoestrap' ),
     'desc'      => __( 'Default: On.', 'shoestrap' ),
     'id'        => 'shoestrap_gridder_show_text_in_lists',
@@ -71,7 +79,7 @@ function shoestrap_module_gridder_options( $sections ) {
     'type'      => 'select',
     'customizer'=> array(),
     'options'   => array( 
-      ' '       => 'Default',
+      'default' => 'Default',
       'info'    => 'Info',
       'success' => 'Success',
       'warning' => 'Warning',
@@ -87,7 +95,7 @@ function shoestrap_module_gridder_options( $sections ) {
     'type'      => 'select',
     'customizer'=> array(),
     'options'   => array( 
-      ' '       => 'Default',
+      'default' => 'Default',
       'info'    => 'Info',
       'success' => 'Success',
       'warning' => 'Warning',

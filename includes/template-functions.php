@@ -10,7 +10,6 @@ function shoestrap_gridder_template_mods() {
   $columns                      = shoestrap_getVariable( 'shoestrap_gridder_posts_columns' );
   $list_title_size              = shoestrap_getVariable( 'shoestrap_gridder_list_title_size' );
   $responsive                   = shoestrap_getVariable( 'site_style' );
-  $entry_meta                   = shoestrap_getVariable( 'entry_meta' );
   $box_style                    = shoestrap_getVariable( 'shoestrap_gridder_box_style' );
 
   // Set the layout class (fixed/responsive)
@@ -42,9 +41,7 @@ function shoestrap_gridder_template_mods() {
       ?>
     </div>
     <footer>
-    <?php if ( $entry_meta == 1 ) 
-      get_template_part('templates/entry-meta');
-    ?>
+      <?php get_template_part('templates/entry-meta'); ?>
     </footer>
   </article>
   <?php

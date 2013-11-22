@@ -109,16 +109,6 @@ function shoestrap_module_gridder_options( $sections ) {
     )
   );
 
-  $fields[] = array( 
-    'title'     => __( 'Show entry metadata', 'shoestrap' ),
-    'desc'      => __( 'Enable this option to show the entry metadata of posts. Default: OFF.', 'shoestrap' ),
-    'id'        => 'entry_meta',
-    'default'   => 0,
-    'customizer'=> array(),
-    'type'      => 'switch'
-  );
-
-
   $section['fields'] = $fields;
 
   $section = apply_filters( 'shoestrap_module_gridder_options_modifier', $section );

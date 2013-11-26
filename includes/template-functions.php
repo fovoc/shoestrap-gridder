@@ -50,14 +50,9 @@ function shoestrap_gridder_template_mods() {
 /*
  * Wrap the content without the page header into a div
  */
-
 function shoestrap_gridder_open_wrapper_div() {
   echo '<div class="wrapperdiv">';
 }
-add_action( 'shoestrap_index_begin', 'shoestrap_gridder_open_wrapper_div', 10 );
-
 function shoestrap_gridder_close_wrapper_div() {
   echo '</div>';
 }
-add_action( 'shoestrap_index_end', 'shoestrap_gridder_close_wrapper_div', 10 );
-

@@ -25,6 +25,9 @@ function shoestrap_gridder_enqueue_resources() {
 		// Enqueue the styles
 		wp_register_style( 'shoestrap_gridder_styles', SHOESTRAPGRIDDERURL . '/assets/css/style.css' );
 		wp_enqueue_style( 'shoestrap_gridder_styles' );
+		// Wrap the content without the page header into a div
+		add_action( 'shoestrap_index_begin', 'shoestrap_gridder_open_wrapper_div', 10 );
+		add_action( 'shoestrap_index_end', 'shoestrap_gridder_close_wrapper_div', 10 );
 	endif;
 }
 

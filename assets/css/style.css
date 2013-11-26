@@ -5,7 +5,7 @@
   word-wrap: break-word;
 }
 
-.entry {
+.hentry {
   float: left;
   padding: 10px;
   margin-bottom: 20px;
@@ -15,33 +15,33 @@
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
-.entry.narrow { width: 22%; }
-.entry.normal { width: 30%; }
-.entry.wide { width: 43%; }
+.hentry.narrow { width: 22%; }
+.hentry.normal { width: 30%; }
+.hentry.wide { width: 43%; }
 
 @media (max-width: 480px) {
-  .entry.narrow { width: 96%; }
-  .entry.normal { width: 96%; }
-  .entry.wide { width: 96%; }
+  .hentry.narrow { width: 96%; }
+  .hentry.normal { width: 96%; }
+  .hentry.wide { width: 96%; }
 }
 
 @media (min-width: 481px) {
-  .span10 .entry.narrow { width: 19%; }
-  .span10 .entry.normal{ width: 28%; }
+  .span10 .hentry.narrow { width: 19%; }
+  .span10 .hentry.normal{ width: 28%; }
  
-  .span9 .entry.narrow { width: 20%; }
-  .span9 .entry.normal { width: 27%; }
+  .span9 .hentry.narrow { width: 20%; }
+  .span9 .hentry.normal { width: 27%; }
 
-  .span8 .entry.narrow { width: 20%; }
-  .span8 .entry.normal { width: 28%; }
+  .span8 .hentry.narrow { width: 20%; }
+  .span8 .hentry.normal { width: 28%; }
 
-  .span7 .entry.narrow { width: 19%; }
-  .span7 .entry.normal { width: 27%; }
+  .span7 .hentry.narrow { width: 19%; }
+  .span7 .hentry.normal { width: 27%; }
 
-  .span6 .entry.narrow { width: 27%; }
-  .span6 .entry.normal { width: 42%; }
+  .span6 .hentry.narrow { width: 27%; }
+  .span6 .hentry.normal { width: 42%; }
 
-  .span6 .entry.wide.fixed { width: 96%; }
+  .span6 .hentry.wide.fixed { width: 96%; }
 }
 
 .post-nav {
@@ -49,7 +49,7 @@
   float: none;
 }
 
-.entry-content .pull-left {
+.hentry-content .pull-left {
   max-width: 100%;
   height:auto;
 }

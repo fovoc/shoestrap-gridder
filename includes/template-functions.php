@@ -25,7 +25,7 @@ function shoestrap_gridder_template_mods() {
     $heading = 'h4';
   ?>
 
-  <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_gridder_post_class . ' entry '. $box_style .' '. $layout ); ?>>
+  <article id="post-<?php the_ID(); ?>" <?php post_class( $shoestrap_gridder_post_class . ' '. $box_style .' '. $layout ); ?>>
     <header>
       <<?php echo $heading; ?>><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></<?php echo $heading; ?>>
     </header>
@@ -48,13 +48,8 @@ function shoestrap_gridder_template_mods() {
 }
 
 /*
- * Use our custom template instead of the default
+ * Wrap the content without the page header into a div
  */
-function shoestrap_gridder_template_mods_actions() {
-  remove_action( 'shoestrap_content_override', 'shoestrap_content_single_override', 10 );
-  add_action( 'shoestrap_content_override', 'shoestrap_gridder_template_mods', 10 );
-}
-add_action( 'shoestrap_content_override', 'shoestrap_gridder_template_mods_actions', 1 );
 
 function shoestrap_gridder_open_wrapper_div() {
   echo '<div class="wrapperdiv">';

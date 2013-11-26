@@ -5,55 +5,6 @@
   word-wrap: break-word;
 }
 
-.hentry {
-  float: left;
-  padding: 10px;
-  margin-bottom: 20px;
-  margin-bottom: 20px;
-  position: relative;
-  -webkit-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
-}
-
-.hentry.narrow { width: 22%; }
-.hentry.normal { width: 30%; }
-.hentry.wide { width: 43%; }
-
-@media (max-width: 480px) {
-  .hentry.narrow { width: 96%; }
-  .hentry.normal { width: 96%; }
-  .hentry.wide { width: 96%; }
-}
-
-@media (min-width: 481px) {
-  .span10 .hentry.narrow { width: 19%; }
-  .span10 .hentry.normal{ width: 28%; }
- 
-  .span9 .hentry.narrow { width: 20%; }
-  .span9 .hentry.normal { width: 27%; }
-
-  .span8 .hentry.narrow { width: 20%; }
-  .span8 .hentry.normal { width: 28%; }
-
-  .span7 .hentry.narrow { width: 19%; }
-  .span7 .hentry.normal { width: 27%; }
-
-  .span6 .hentry.narrow { width: 27%; }
-  .span6 .hentry.normal { width: 42%; }
-
-  .span6 .hentry.wide.fixed { width: 96%; }
-}
-
-.post-nav {
-  clear: both;
-  float: none;
-}
-
-.hentry-content .pull-left {
-  max-width: 100%;
-  height:auto;
-}
-
 #infscr-loading {
   position: fixed;
   text-align: center;

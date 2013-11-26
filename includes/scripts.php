@@ -8,17 +8,31 @@ function shoestrap_gridder_enqueue_resources() {
 	$masonry        = shoestrap_getVariable( 'shoestrap_gridder_masorny' );
 
 	if ( $masonry == 1 ) :
+		// Register && Enqueue masonry.js
 		wp_enqueue_style( 'shoestrap_gridder_styles', SHOESTRAPGRIDDERURL . '/assets/css/style.css', false, null );
-		wp_register_script( 'shoestrap_gridder_masonry', SHOESTRAPGRIDDERURL . '/assets/js/jquery.masonry.min.js', false, null, true );
+		wp_register_script( 'shoestrap_gridder_masonry', SHOESTRAPGRIDDERURL . '/assets/js/masonry.pkgd.min.js', false, null, true );
 		wp_enqueue_script( 'shoestrap_gridder_masonry' );
- 		// Use our custom template instead of the default
- 		remove_action( 'shoestrap_content_override', 'shoestrap_content_single_override', 10 );
-		add_action( 'shoestrap_content_override', 'shoestrap_gridder_template_mods', 10 );
+		// Insert the Well or Panel class
+		add_action( 'shoestrap_in_article_top', 'shoestrap_gridder_article_in_top' );
+		// Insert the appropriate classes for grid
+		add_filter( 'post_class', 'shoestrap_gridder_post_classes' );
+		// Insert specific Panel actions
+		if ( shoestrap_getVariable( 'shoestrap_gridder_box_style' ) == 'panel' ) :
+      add_action( 'shoestrap_override_header', 'shoestrap_gridder_override_header_panel' );
+      add_action( 'shoestrap_in_article_bottom', function() { echo '</div></div>'; } );
+    endif;
+    // Insert specific Well actions
+    if ( shoestrap_getVariable( 'shoestrap_gridder_box_style' ) == 'well' ) :
+      add_action( 'shoestrap_override_header', 'shoestrap_gridder_override_header_well' );
+    endif;
+
 	endif;
 
 	if ( $infinitescroll == 1 ) :
 		wp_register_script( 'shoestrap_gridder_infinitescroll', SHOESTRAPGRIDDERURL . '/assets/js/jquery.infinitescroll.min.js', false, null, true );
 		wp_enqueue_script( 'shoestrap_gridder_infinitescroll' );
+		wp_register_script( 'shoestrap_gridder_imagesloaded', SHOESTRAPGRIDDERURL . '/assets/js/imagesloaded.pkgd.min.js', false, null, true );
+		wp_enqueue_script( 'shoestrap_gridder_imagesloaded' );
 	endif;
 
 	if ( $masonry == 1 || $infinitescroll == 1 ) :
@@ -56,7 +70,7 @@ function shoestrap_gridder_script() {
 		// selector for the NEXT link (to page 2)
 		$nextSelector = '.pager .previous a';
 		// selector for all items you'll retrieve
-		$itemSelector = '.hentry';
+		$itemSelector = ".hentry";
 	?>
 
 	<?php if ( $masonry == 1 || $infinitescroll == 1 ) : ?>
@@ -70,12 +84,10 @@ function shoestrap_gridder_script() {
 			// Masonry
 			<?php if ( $masonry == 1 ) : ?>
 				$j(container).masonry({
-					itemSelector: '<?php echo $itemSelector; ?>',
-					columnWidth: function( containerWidth ) {
-						return containerWidth / 12;
-					},
+					itemSelector: "<?php echo $itemSelector; ?>",
 					isResizable: true,
-					isAnimated: Modernizr.csstransitions
+			    transform: 'scale(1)',
+			    transitionDuration: '0.618s'
 				});
 			<?php endif; ?>
 

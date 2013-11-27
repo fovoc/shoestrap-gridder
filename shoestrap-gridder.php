@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Shoestrap Gridder Addon
+Plugin Name: Shoestrap 3 Gridder Addon
 Plugin URI: http://bootstrap-commerce.com
 Description: This plugin adds the necessary templates and functions to the shoestrap theme
 Version: 1.15

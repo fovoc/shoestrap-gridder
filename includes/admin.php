@@ -89,20 +89,6 @@ function shoestrap_module_gridder_options( $sections ) {
     )
   );
 
-  $fields[] = array( 
-    'title'     => __( 'Post Width', 'shoestrap' ),
-    'desc'      => __( 'Select the width of a single post. This eventually changes the number of columns.', 'shoestrap' ),
-    'id'        => 'shoestrap_gridder_posts_columns',
-    'default'   => 'normal',
-    'type'      => 'select',
-    'customizer'=> array(),
-    'options'   => array( 
-      'narrow' => 'Narrow',
-      'normal' => 'Normal',
-      'wide'   => 'Wide'
-    )
-  );
-
   $section['fields'] = $fields;
 
   $section = apply_filters( 'shoestrap_module_gridder_options_modifier', $section );
@@ -111,4 +97,22 @@ function shoestrap_module_gridder_options( $sections ) {
   return $sections;
 }
 endif;
-add_filter( 'redux-sections-'.REDUX_OPT_NAME, 'shoestrap_module_gridder_options', 1 );
+add_filter( 'redux-sections-'.REDUX_OPT_NAME, 'shoestrap_module_gridder_options', 93 );
+
+
+function shoestrap_addong_gridder_licensing($section) {
+  $section['fields'][] = array( 
+    'title'            => __( 'Shoestrap Gridder Licence', 'shoestrap' ),
+    'id'              => 'shoestrap_gridder_license_key',
+    'default'         => '',
+    'type'            => 'edd_license',
+    'mode'            => 'plugin', // theme|plugin
+    'path'            => SHOESTRAPGRIDDERFILE, // Path to the plugin/template main file
+    'remote_api_url'  => 'http://shoestrap.org',    // our store URL that is running EDD
+    'field_id'        => "shoestrap_license_key", // ID of the field used by EDD
+  ); 
+  return $section;
+}
+add_filter( 'shoestrap_module_licencing_options_modifier', 'shoestrap_addong_gridder_licensing' );
+
+

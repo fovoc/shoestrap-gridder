@@ -84,7 +84,7 @@ function shoestrap_gridder_override_header_well() { ?>
  * Wrap the content without the page header into a div
  */
 function shoestrap_gridder_open_wrapper_div() {
-  echo '<div class="wrapperdiv">';
+  echo '<div class="wrapperdiv row">';
 }
 function shoestrap_gridder_close_wrapper_div() {
   echo '</div>';

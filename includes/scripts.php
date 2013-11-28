@@ -3,37 +3,10 @@
 /*
  * Enqueue the necessary javascript and css resources
  */
+if ( !function_exists( 'shoestrap_gridder_enqueue_resources' ) ) :
 function shoestrap_gridder_enqueue_resources() {
 	$infinitescroll = shoestrap_getVariable( 'shoestrap_gridder_infinite_scroll' );
 	$masonry        = shoestrap_getVariable( 'shoestrap_gridder_masorny' );
-
-	if ( $masonry == 1 ) :
-		// Register && Enqueue masonry.js
-		wp_enqueue_style( 'shoestrap_gridder_styles', SHOESTRAPGRIDDERURL . '/assets/css/style.css', false, null );
-		wp_register_script( 'shoestrap_gridder_masonry', SHOESTRAPGRIDDERURL . '/assets/js/masonry.pkgd.min.js', false, null, true );
-		wp_enqueue_script( 'shoestrap_gridder_masonry' );
-		// Insert the Well or Panel class
-		add_action( 'shoestrap_in_article_top', 'shoestrap_gridder_article_in_top' );
-		// Insert the appropriate classes for grid
-		add_filter( 'post_class', 'shoestrap_gridder_post_classes' );
-		// Insert specific Panel actions
-		if ( shoestrap_getVariable( 'shoestrap_gridder_box_style' ) == 'panel' ) :
-      add_action( 'shoestrap_override_header', 'shoestrap_gridder_override_header_panel' );
-      add_action( 'shoestrap_in_article_bottom', function() { echo '</div></div>'; } );
-    endif;
-    // Insert specific Well actions
-    if ( shoestrap_getVariable( 'shoestrap_gridder_box_style' ) == 'well' ) :
-      add_action( 'shoestrap_override_header', 'shoestrap_gridder_override_header_well' );
-    endif;
-
-	endif;
-
-	if ( $infinitescroll == 1 ) :
-		wp_register_script( 'shoestrap_gridder_infinitescroll', SHOESTRAPGRIDDERURL . '/assets/js/jquery.infinitescroll.min.js', false, null, true );
-		wp_enqueue_script( 'shoestrap_gridder_infinitescroll' );
-		wp_register_script( 'shoestrap_gridder_imagesloaded', SHOESTRAPGRIDDERURL . '/assets/js/imagesloaded.pkgd.min.js', false, null, true );
-		wp_enqueue_script( 'shoestrap_gridder_imagesloaded' );
-	endif;
 
 	if ( $masonry == 1 || $infinitescroll == 1 ) :
 		// Enqueue the styles
@@ -42,11 +15,40 @@ function shoestrap_gridder_enqueue_resources() {
 		// Wrap the content without the page header into a div
 		add_action( 'shoestrap_index_begin', 'shoestrap_gridder_open_wrapper_div', 10 );
 		add_action( 'shoestrap_index_end', 'shoestrap_gridder_close_wrapper_div', 10 );
+
+		if ( $masonry == 1 ) :
+			// Register && Enqueue masonry.js
+			wp_enqueue_style( 'shoestrap_gridder_styles', SHOESTRAPGRIDDERURL . '/assets/css/style.css', false, null );
+			wp_register_script( 'shoestrap_gridder_masonry', SHOESTRAPGRIDDERURL . '/assets/js/masonry.pkgd.min.js', false, null, true );
+			wp_enqueue_script( 'shoestrap_gridder_masonry' );
+			// Insert the Well or Panel class
+			add_action( 'shoestrap_in_article_top', 'shoestrap_gridder_article_in_top' );
+			// Insert the appropriate classes for grid
+			add_filter( 'post_class', 'shoestrap_gridder_post_classes' );
+			// Insert specific Panel actions
+			if ( shoestrap_getVariable( 'shoestrap_gridder_box_style' ) == 'panel' ) :
+				add_action( 'shoestrap_override_header', 'shoestrap_gridder_override_header_panel' );
+				add_action( 'shoestrap_in_article_bottom', function() { echo '</div></div>'; } );
+			endif;
+
+			// Insert specific Well actions
+			if ( shoestrap_getVariable( 'shoestrap_gridder_box_style' ) == 'well' ) :
+				add_action( 'shoestrap_override_header', 'shoestrap_gridder_override_header_well' );
+			endif;
+		endif;
+
+		if ( $infinitescroll == 1 ) :
+			wp_register_script( 'shoestrap_gridder_infinitescroll', SHOESTRAPGRIDDERURL . '/assets/js/jquery.infinitescroll.min.js', false, null, true );
+			wp_enqueue_script( 'shoestrap_gridder_infinitescroll' );
+			wp_register_script( 'shoestrap_gridder_imagesloaded', SHOESTRAPGRIDDERURL . '/assets/js/imagesloaded.pkgd.min.js', false, null, true );
+			wp_enqueue_script( 'shoestrap_gridder_imagesloaded' );
+		endif;
 	endif;
 }
+endif;
 
 
-
+if ( !function_exists( 'shoestrap_gridder_script' ) ) :
 function shoestrap_gridder_script() {
 	$infinitescroll = shoestrap_getVariable( 'shoestrap_gridder_infinite_scroll' );
 	$masonry        = shoestrap_getVariable( 'shoestrap_gridder_masorny' );
@@ -86,8 +88,8 @@ function shoestrap_gridder_script() {
 				$j(container).masonry({
 					itemSelector: "<?php echo $itemSelector; ?>",
 					isResizable: true,
-			    transform: 'scale(1)',
-			    transitionDuration: '0.618s'
+				transform: 'scale(1)',
+				transitionDuration: '0.618s'
 				});
 			<?php endif; ?>
 
@@ -122,14 +124,18 @@ function shoestrap_gridder_script() {
 		</script>
 	<?php endif;
 }
+endif;
+
 
 /*
  * Only add the scripts if the user is not seing a single post, page or other custom post type.
  */
+if ( !function_exists( 'shoestrap_gridder_enqueue_resources_checked' ) ) :
 function shoestrap_gridder_enqueue_resources_checked() {
-	if ( !is_singular() ) {
+	if ( !is_singular() ) :
 		add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 201);
 		add_action( 'wp_footer', 'shoestrap_gridder_script' );
-	}
+	endif;
 }
+endif;
 add_action( 'wp', 'shoestrap_gridder_enqueue_resources_checked' );

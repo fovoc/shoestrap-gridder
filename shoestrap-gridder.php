@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Shoestrap 3 Gridder Addon
-Plugin URI: http://bootstrap-commerce.com
-Description: This plugin adds the necessary templates and functions to the shoestrap theme
-Version: 1.15
+Plugin URI: http://shoestrap.org
+Description: This plugin adds infinite scroll and masonry to the Shoestrap 3 theme.
+Version: 3.0.00
 Author: Aristeides Stathopoulos
 Author URI: http://aristeides.com
 */

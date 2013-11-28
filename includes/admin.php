@@ -133,5 +133,3 @@ function shoestrap_addong_gridder_licensing($section) {
   return $section;
 }
 add_filter( 'shoestrap_module_licencing_options_modifier', 'shoestrap_addong_gridder_licensing' );
-
-

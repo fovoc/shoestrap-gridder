@@ -38,7 +38,8 @@ function shoestrap_module_gridder_options( $sections ) {
       'well'    => 'Well',
       'panel'   => 'Panel'
     ),
-    'default' => ' '
+    'default' => ' ',
+    'required'  => array( 'shoestrap_gridder_masorny','=',array( '1' ) ),
   );
 
   $fields[] = array( 
@@ -46,7 +47,8 @@ function shoestrap_module_gridder_options( $sections ) {
     'desc'      => __( 'The text inside the progress bar as next set is loading.', 'shoestrap' ),
     'id'        => 'shoestrap_gridder_loading_text',
     'default'   => 'Loading...',
-    'type'      => 'text'
+    'type'      => 'text',
+    'required'  => array( 'shoestrap_gridder_infinite_scroll','=',array( '1' ) ),
   );
 
   $fields[] = array( 
@@ -54,7 +56,8 @@ function shoestrap_module_gridder_options( $sections ) {
     'desc'      => __( 'The text inside the progress bar when no more posts are available.', 'shoestrap' ),
     'id'        => 'shoestrap_gridder_end_text',
     'default'   => 'End of list',
-    'type'      => 'text'
+    'type'      => 'text',
+    'required'  => array( 'shoestrap_gridder_infinite_scroll','=',array( '1' ) ),
   );
 
   $fields[] = array( 
@@ -70,7 +73,8 @@ function shoestrap_module_gridder_options( $sections ) {
       'success' => 'Success',
       'warning' => 'Warning',
       'danger'  => 'Danger'
-    )
+    ),
+    'required'  => array( 'shoestrap_gridder_infinite_scroll','=',array( '1' ) ),
   );
 
   $fields[] = array( 
@@ -86,7 +90,22 @@ function shoestrap_module_gridder_options( $sections ) {
       'success' => 'Success',
       'warning' => 'Warning',
       'danger'  => 'Danger'
-    )
+    ),
+    'required'  => array( 'shoestrap_gridder_infinite_scroll','=',array( '1' ) ),
+  );
+
+  $fields[] = array(
+    'title'     => __( 'Post Width', 'shoestrap' ),
+    'desc'      => __( 'Select the width of a single post. This eventually changes the number of columns.', 'shoestrap' ),
+    'id'        => 'shoestrap_gridder_posts_columns',
+    'default'   => 'normal',
+    'type'      => 'select',
+    'options'   => array(
+      'narrow' => 'Narrow',
+      'normal' => 'Normal',
+      'wide'   => 'Wide'
+    ),
+    'required'  => array( 'shoestrap_gridder_masorny','=',array( '1' ) ),
   );
 
   $section['fields'] = $fields;

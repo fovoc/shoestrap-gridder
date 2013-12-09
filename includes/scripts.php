@@ -6,9 +6,9 @@
 if ( !function_exists( 'shoestrap_gridder_enqueue_resources' ) ) :
 function shoestrap_gridder_enqueue_resources() {
 	$infinitescroll = shoestrap_getVariable( 'shoestrap_gridder_infinite_scroll' );
-	$masonry        = shoestrap_getVariable( 'shoestrap_gridder_masorny' );
+	$isotope        = shoestrap_getVariable( 'shoestrap_gridder_isotope' );
 
-	if ( $masonry == 1 || $infinitescroll == 1 ) :
+	if ( $isotope == 1 || $infinitescroll == 1 ) :
 		// Enqueue the styles
 		wp_register_style( 'shoestrap_gridder_styles', SHOESTRAPGRIDDERURL . '/assets/css/style.css' );
 		wp_enqueue_style( 'shoestrap_gridder_styles' );
@@ -16,11 +16,15 @@ function shoestrap_gridder_enqueue_resources() {
 		add_action( 'shoestrap_index_begin', 'shoestrap_gridder_open_wrapper_div', 10 );
 		add_action( 'shoestrap_index_end', 'shoestrap_gridder_close_wrapper_div', 10 );
 
-		if ( $masonry == 1 ) :
-			// Register && Enqueue masonry.js
+		if ( $isotope == 1 ) :
+			// Register && Enqueue Isotope
 			wp_enqueue_style( 'shoestrap_gridder_styles', SHOESTRAPGRIDDERURL . '/assets/css/style.css', false, null );
-			wp_register_script( 'shoestrap_gridder_masonry', SHOESTRAPGRIDDERURL . '/assets/js/masonry.pkgd.min.js', false, null, true );
-			wp_enqueue_script( 'shoestrap_gridder_masonry' );
+			wp_register_script( 'shoestrap_gridder_isotope', SHOESTRAPGRIDDERURL . '/assets/js/jquery.isotope.min.js', false, null, true );
+			wp_enqueue_script( 'shoestrap_gridder_isotope' );
+			// Register && Enqueue Isotope Sloppy Masonry
+			wp_enqueue_style( 'shoestrap_gridder_styles', SHOESTRAPGRIDDERURL . '/assets/css/style.css', false, null );
+			wp_register_script( 'shoestrap_gridder_sloppy', SHOESTRAPGRIDDERURL . '/assets/js/jquery.isotope.sloppy-masonry.min.js', false, null, true );
+			wp_enqueue_script( 'shoestrap_gridder_sloppy' );
 			// Insert the Well or Panel class
 			add_action( 'shoestrap_in_article_top', 'shoestrap_gridder_article_in_top' );
 			// Insert the appropriate classes for grid
@@ -51,7 +55,7 @@ endif;
 if ( !function_exists( 'shoestrap_gridder_script' ) ) :
 function shoestrap_gridder_script() {
 	$infinitescroll = shoestrap_getVariable( 'shoestrap_gridder_infinite_scroll' );
-	$masonry        = shoestrap_getVariable( 'shoestrap_gridder_masorny' );
+	$isotope        = shoestrap_getVariable( 'shoestrap_gridder_isotope' );
 
 	$msgText = "";
 	$msgText .= "<div class='progress progress-striped active' style='width:220px;margin-bottom:0px;'>";
@@ -75,7 +79,7 @@ function shoestrap_gridder_script() {
 		$itemSelector = ".hentry";
 	?>
 
-	<?php if ( $masonry == 1 || $infinitescroll == 1 ) : ?>
+	<?php if ( $isotope == 1 || $infinitescroll == 1 ) : ?>
 		<script>
 		// Using jQuery.noConflict
 		var $j = jQuery.noConflict();
@@ -83,13 +87,15 @@ function shoestrap_gridder_script() {
 		$j(window).load(function(){
 			var container = $j('.row .main .wrapperdiv');
 			
-			// Masonry
-			<?php if ( $masonry == 1 ) : ?>
-				$j(container).masonry({
-					itemSelector: "<?php echo $itemSelector; ?>",
-					isResizable: true,
-				transform: 'scale(1)',
-				transitionDuration: '0.618s'
+			// Isotope
+			<?php if ( $isotope == 1 ) : ?>
+				$j(container).isotope({
+					animationEngine: "best-available"
+				});
+				// SLOPPY
+				$j(container).isotope({
+				    layoutMode: "sloppyMasonry",
+				    itemSelector: ".hentry"
 				});
 			<?php endif; ?>
 
@@ -104,7 +110,7 @@ function shoestrap_gridder_script() {
 						finishedMsg: "<?php echo $finishedMsg; ?>"
 					}
 			<?php endif; ?>
-				<?php if ( $masonry == 1 && $infinitescroll == 1 ) : ?>
+				<?php if ( $isotope == 1 && $infinitescroll == 1 ) : ?>
 					// trigger Masonry as a callback
 					},function( newElements ) {
 						// hide new items while they are loading
@@ -113,10 +119,10 @@ function shoestrap_gridder_script() {
 						$j(newElems).imagesLoaded(function(){
 							// show elems now they're ready
 							$j(newElems).animate({ opacity: 1 });
-							$j(container).masonry( 'appended', $j(newElems), true );
+							$j(container).isotope( 'appended', $j(newElems), true );
 						});
 					});
-				<?php elseif ( $masonry == 0 && $infinitescroll == 1 ): ?>
+				<?php elseif ( $isotope == 0 && $infinitescroll == 1 ): ?>
 					});
 				<?php endif; ?>
 

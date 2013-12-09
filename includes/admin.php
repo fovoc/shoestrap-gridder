@@ -13,17 +13,9 @@ function shoestrap_module_gridder_options( $sections ) {
 	);
 
 	$fields[] = array( 
-		'title'     => __( 'Enable Infinite Scroll', 'shoestrap' ),
+		'title'     => __( 'Enable Isotope', 'shoestrap' ),
 		'desc'      => __( 'Default: On.', 'shoestrap' ),
-		'id'        => 'shoestrap_gridder_infinite_scroll',
-		'default'   => 1,
-		'type'      => 'switch'
-	);
-
-	$fields[] = array( 
-		'title'     => __( 'Enable Masonry', 'shoestrap' ),
-		'desc'      => __( 'Default: On.', 'shoestrap' ),
-		'id'        => 'shoestrap_gridder_masorny',
+		'id'        => 'shoestrap_gridder_isotope',
 		'default'   => 1,
 		'type'      => 'switch'
 	);
@@ -39,7 +31,29 @@ function shoestrap_module_gridder_options( $sections ) {
 			'panel'   => 'Panel'
 		),
 		'default' => ' ',
-		'required'  => array( 'shoestrap_gridder_masorny','=',array( '1' ) ),
+		'required'  => array( 'shoestrap_gridder_isotope','=',array( '1' ) ),
+	);
+
+	$fields[] = array(
+		'title'     => __( 'Post Width', 'shoestrap' ),
+		'desc'      => __( 'Select the width of a single post. This eventually changes the number of columns.', 'shoestrap' ),
+		'id'        => 'shoestrap_gridder_posts_columns',
+		'default'   => 'normal',
+		'type'      => 'select',
+		'options'   => array(
+			'narrow' => 'Narrow',
+			'normal' => 'Normal',
+			'wide'   => 'Wide'
+		),
+		'required'  => array( 'shoestrap_gridder_isotope','=',array( '1' ) ),
+	);
+
+	$fields[] = array( 
+		'title'     => __( 'Enable Infinite Scroll', 'shoestrap' ),
+		'desc'      => __( 'Default: On.', 'shoestrap' ),
+		'id'        => 'shoestrap_gridder_infinite_scroll',
+		'default'   => 1,
+		'type'      => 'switch'
 	);
 
 	$fields[] = array( 
@@ -92,20 +106,6 @@ function shoestrap_module_gridder_options( $sections ) {
 			'danger'  => 'Danger'
 		),
 		'required'  => array( 'shoestrap_gridder_infinite_scroll','=',array( '1' ) ),
-	);
-
-	$fields[] = array(
-		'title'     => __( 'Post Width', 'shoestrap' ),
-		'desc'      => __( 'Select the width of a single post. This eventually changes the number of columns.', 'shoestrap' ),
-		'id'        => 'shoestrap_gridder_posts_columns',
-		'default'   => 'normal',
-		'type'      => 'select',
-		'options'   => array(
-			'narrow' => 'Narrow',
-			'normal' => 'Normal',
-			'wide'   => 'Wide'
-		),
-		'required'  => array( 'shoestrap_gridder_masorny','=',array( '1' ) ),
 	);
 
 	$section['fields'] = $fields;

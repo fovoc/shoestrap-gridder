@@ -13,7 +13,7 @@ function shoestrap_module_gridder_options( $sections ) {
 	);
 
 	$fields[] = array( 
-		'title'     => __( 'Enable Isotope', 'shoestrap' ),
+		'title'     => __( 'Enable Isotope (Masonry)', 'shoestrap' ),
 		'desc'      => __( 'Default: On.', 'shoestrap' ),
 		'id'        => 'shoestrap_gridder_isotope',
 		'default'   => 1,

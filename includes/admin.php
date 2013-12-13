@@ -108,6 +108,51 @@ function shoestrap_module_gridder_options( $sections ) {
 		'required'  => array( 'shoestrap_gridder_infinite_scroll','=',array( '1' ) ),
 	);
 
+	$fields[] = array( 
+		'title' 		=> __( 'Gridder Selectors', 'shoestrap' ),
+		'desc'      => __( 'Change the selectors that triggers Isotope(Masonry) and Infinite Scroll. Use at your own risk.', 'shoestrap' ),
+		'id'        => 'shoestrap_gridder_selectors',
+		'default'   => 0,
+		'type'      => 'switch'
+	);
+
+	$fields[] = array( 
+		'title'     => __( 'Masonry Container', 'shoestrap' ),
+		'desc'      => __( 'Select the container that contains your items. (e.g. #grid or .product-list)', 'shoestrap' ),
+		'id'        => 'shoestrap_gridder_container',
+		'default'   => '.row .main .wrapperdiv',
+		'type'      => 'text',
+		'required'  => array( 'shoestrap_gridder_selectors','=',array( '1' ) ),
+	);
+
+	$fields[] = array( 
+		'title'     => __( 'Masonry && Infinite Scroll Item', 'shoestrap' ),
+		'desc'      => __( 'Select your items with a class (e.g. .products)', 'shoestrap' ),
+		'id'        => 'shoestrap_gridder_item',
+		'default'   => '.hentry',
+		'type'      => 'text',
+		'required'  => array( 'shoestrap_gridder_selectors','=',array( '1' ) ),
+	);
+
+	$fields[] = array( 
+		'title'     => __( 'Infinite Scroll Navigation Selector', 'shoestrap' ),
+		'desc'      => __( 'Select your Navigation. (e.g. .pager or .pagination)', 'shoestrap' ),
+		'id'        => 'shoestrap_gridder_navigation',
+		'default'   => '.pager',
+		'type'      => 'text',
+		'required'  => array( 'shoestrap_gridder_selectors','=',array( '1' ) ),
+	);
+
+	$fields[] = array( 
+		'title'     => __( 'Infinite Scroll Next-Page Selector', 'shoestrap' ),
+		'desc'      => __( 'Select your Next-Page. (e.g. .pager .previous a)', 'shoestrap' ),
+		'id'        => 'shoestrap_gridder_nextpage',
+		'default'   => '.pager .previous a',
+		'type'      => 'text',
+		'required'  => array( 'shoestrap_gridder_selectors','=',array( '1' ) ),
+	);
+
+
 	$section['fields'] = $fields;
 
 	$section = apply_filters( 'shoestrap_module_gridder_options_modifier', $section );

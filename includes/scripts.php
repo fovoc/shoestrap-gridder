@@ -71,12 +71,37 @@ function shoestrap_gridder_script() {
 		$finishedMsg .= "</div>";
 	$finishedMsg .= "</div>";
 
+	$selectors = shoestrap_getVariable( 'shoestrap_gridder_selectors' );
+	
 	// selector for the paged navigation
+	if ( $selectors == 1 ) :
+		$navSelector  = shoestrap_getVariable( 'shoestrap_gridder_navigation' );
+	else :
 		$navSelector  = '.pager';
-		// selector for the NEXT link (to page 2)
-		$nextSelector = '.pager .previous a';
-		// selector for all items you'll retrieve
-		$itemSelector = ".hentry";
+	endif;
+	
+	// selector for the NEXT link (to page 2)
+	if ( $selectors == 1 ) :
+		$nextSelector = shoestrap_getVariable( 'shoestrap_gridder_nextpage' );
+	else :
+		$nextSelector  = '.pager .previous a';
+	endif;
+	
+	// selector for all items you'll retrieve
+	if ( $selectors == 1 ) :
+		$itemSelector = shoestrap_getVariable( 'shoestrap_gridder_item' );
+	else :
+		$itemSelector  = '.hentry';
+	endif;
+	
+	// container selector
+	if ( $selectors == 1 ) :
+		$container = shoestrap_getVariable( 'shoestrap_gridder_container' );
+	else :
+		$container  = '.row .main .wrapperdiv';
+	endif;
+
+
 	?>
 
 	<?php if ( $isotope == 1 || $infinitescroll == 1 ) : ?>
@@ -85,7 +110,7 @@ function shoestrap_gridder_script() {
 		var $j = jQuery.noConflict();
 
 		$j(window).load(function(){
-			var container = $j('.row .main .wrapperdiv');
+			var container = $j('<?php echo $container; ?>');
 			
 			// Isotope
 			<?php if ( $isotope == 1 ) : ?>
@@ -95,7 +120,7 @@ function shoestrap_gridder_script() {
 				// SLOPPY
 				$j(container).isotope({
 				    layoutMode: "sloppyMasonry",
-				    itemSelector: ".hentry"
+				    itemSelector: "<?php echo $itemSelector; ?>"
 				});
 			<?php endif; ?>
 

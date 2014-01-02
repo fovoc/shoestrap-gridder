@@ -162,6 +162,7 @@ function shoestrap_module_gridder_options( $sections ) {
 }
 endif;
 add_filter( 'redux-sections-'.REDUX_OPT_NAME, 'shoestrap_module_gridder_options', 93 );
+add_filter( 'redux/options/' . REDUX_OPT_NAME . '/sections', 'shoestrap_module_gridder_options', 93 );
 
 
 if ( !function_exists( 'shoestrap_addong_gridder_licensing' ) ) :

@@ -32,7 +32,7 @@ function shoestrap_gridder_enqueue_resources() {
 			// Insert specific Panel actions
 			if ( shoestrap_getVariable( 'shoestrap_gridder_box_style' ) == 'panel' ) :
 				add_action( 'shoestrap_override_header', 'shoestrap_gridder_override_header_panel' );
-				add_action( 'shoestrap_in_article_bottom', function() { echo '</div></div>'; } );
+				add_action( 'shoestrap_in_article_bottom', 'shoestrap_gridder_dummy_close_divs' );
 			endif;
 
 			// Insert specific Well actions
@@ -170,3 +170,7 @@ function shoestrap_gridder_enqueue_resources_checked() {
 }
 endif;
 add_action( 'wp', 'shoestrap_gridder_enqueue_resources_checked' );
+
+function shoestrap_gridder_dummy_close_divs() {
+	echo '</div></div>';
+}

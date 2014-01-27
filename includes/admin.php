@@ -38,13 +38,13 @@ function shoestrap_module_gridder_options( $sections ) {
 		'title'     => __( 'Post Width', 'shoestrap' ),
 		'desc'      => __( 'Select the width of a single post. This eventually changes the number of columns.', 'shoestrap' ),
 		'id'        => 'shoestrap_gridder_posts_columns',
-		'default'   => 'normal',
 		'type'      => 'select',
 		'options'   => array(
 			'narrow' => 'Narrow',
 			'normal' => 'Normal',
 			'wide'   => 'Wide'
 		),
+		'default' => 'normal',
 		'required'  => array( 'shoestrap_gridder_isotope','=',array( '1' ) ),
 	);
 
@@ -78,7 +78,7 @@ function shoestrap_module_gridder_options( $sections ) {
 		'title'     => __( 'Loading progress bar color', 'shoestrap' ),
 		'desc'      => __( 'Select between standard Bootstrap\'s progress bars classes', 'shoestrap' ),
 		'id'        => 'shoestrap_gridder_loading_color',
-		'default'   => ' ',
+		'default'   => 'default',
 		'type'      => 'select',
 		'customizer'=> array(),
 		'options'   => array( 
@@ -95,7 +95,7 @@ function shoestrap_module_gridder_options( $sections ) {
 		'title'     => __( 'End progress bar color', 'shoestrap' ),
 		'desc'      => __( 'Select between standard Bootstrap\'s progress bars classes', 'shoestrap' ),
 		'id'        => 'shoestrap_gridder_end_color',
-		'default'   => ' ',
+		'default'   => 'default',
 		'type'      => 'select',
 		'customizer'=> array(),
 		'options'   => array( 
@@ -161,8 +161,10 @@ function shoestrap_module_gridder_options( $sections ) {
 	return $sections;
 }
 endif;
-add_filter( 'redux-sections-'.REDUX_OPT_NAME, 'shoestrap_module_gridder_options', 93 );
-add_filter( 'redux/options/' . REDUX_OPT_NAME . '/sections', 'shoestrap_module_gridder_options', 93 );
+// compatibility for Shoestrap version < 3.0.3.02
+// replace next filter with the commented one
+add_filter( 'redux/options/' . REDUX_OPT_NAME . '/sections', 'shoestrap_module_gridder_options', 20 );
+// add_filter( 'redux-sections-'.REDUX_OPT_NAME, 'shoestrap_module_gridder_options', 20 );
 
 
 if ( !function_exists( 'shoestrap_addong_gridder_licensing' ) ) :

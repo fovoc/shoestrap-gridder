@@ -165,7 +165,7 @@ if ( !function_exists( 'shoestrap_gridder_enqueue_resources_checked' ) ) :
 function shoestrap_gridder_enqueue_resources_checked() {
 	if ( !is_singular() ) :
 		add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 201);
-		add_action( 'wp_footer', 'shoestrap_gridder_script' );
+		add_action( 'wp_footer', 'shoestrap_gridder_script', 202 );
 	endif;
 }
 endif;

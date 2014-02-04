@@ -8,11 +8,11 @@ Author: Aristeides Stathopoulos, Dimitris Kalliris
 Author URI: http://wpmu.io
 */
 
+if ( !defined( 'REDUX_OPT_NAME' ) )
+	define( 'REDUX_OPT_NAME', 'shoestrap' );
+
 define( 'SHOESTRAPGRIDDERURL', plugins_url( '', __FILE__ ) );
 define( 'SHOESTRAPGRIDDERFILE', __FILE__ );
-
-if ( file_exists( get_template_directory() . '/lib/modules/core.redux/module.php' ) )
-	require_once get_template_directory() . '/lib/modules/core.redux/module.php';
 
 if ( file_exists( dirname( __FILE__ ) . '/includes/admin.php' ) )
 	require_once dirname( __FILE__ ) . '/includes/admin.php';

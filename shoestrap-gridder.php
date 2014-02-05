@@ -7,7 +7,7 @@ Version:             3.1.0
 Author:              Aristeides Stathopoulos, Dimitris Kalliris
 Author URI:          http://wpmu.io
 GitHub Plugin URI:   https://github.com/shoestrap/shoestrap-gridder
-GitHub Access Token: 9570d6239f768f1a3cb9112db4d0b47ca84cc05b
+GitHub Access Token: 35ac969e65c1e15373b79cfb0bdfc0e025529b15
 */
 
 if ( !defined( 'REDUX_OPT_NAME' ) )

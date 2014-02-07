@@ -52,110 +52,40 @@ function shoestrap_gridder_enqueue_resources() {
 endif;
 
 
-if ( !function_exists( 'shoestrap_gridder_script' ) ) :
-function shoestrap_gridder_script() {
-	$infinitescroll = shoestrap_getVariable( 'shoestrap_gridder_infinite_scroll' );
-	$isotope        = shoestrap_getVariable( 'shoestrap_gridder_isotope' );
-
-	$msgText = "";
-	$msgText .= "<div class='progress progress-striped active' style='width:220px;margin-bottom:0px;'>";
-		$msgText .= "<div class='progress-bar progress-bar-" . __( shoestrap_getVariable( 'shoestrap_gridder_loading_color' ) ) . "' style='width: 100%;'>";
-			$msgText .= "<span class='gridder_bar_text'>" . __( shoestrap_getVariable( 'shoestrap_gridder_loading_text' ) ) . "<span>";
-		$msgText .= "</div>";
-	$msgText .= "</div>";
-
-	$finishedMsg = "";
-	$finishedMsg .= "<div class='progress progress-striped active' style='width:220px;margin-bottom:0px;'>";
-		$finishedMsg .= "<div class='progress-bar progress-bar-" . __( shoestrap_getVariable( 'shoestrap_gridder_end_color' ) ) . "' style='width: 100%;'>";
-			$finishedMsg .= "<span class='gridder_bar_text'>" . __( shoestrap_getVariable( 'shoestrap_gridder_end_text' ) ) . "<span>";
-		$finishedMsg .= "</div>";
-	$finishedMsg .= "</div>";
-
-	$selectors = shoestrap_getVariable( 'shoestrap_gridder_selectors' );
-	
-	// selector for the paged navigation
-	if ( $selectors == 1 ) :
-		$navSelector  = shoestrap_getVariable( 'shoestrap_gridder_navigation' );
-	else :
-		$navSelector  = '.pager';
-	endif;
-	
-	// selector for the NEXT link (to page 2)
-	if ( $selectors == 1 ) :
-		$nextSelector = shoestrap_getVariable( 'shoestrap_gridder_nextpage' );
-	else :
-		$nextSelector  = '.pager .previous a';
-	endif;
-	
-	// selector for all items you'll retrieve
-	if ( $selectors == 1 ) :
-		$itemSelector = shoestrap_getVariable( 'shoestrap_gridder_item' );
-	else :
-		$itemSelector  = '.hentry';
-	endif;
-	
-	// container selector
-	if ( $selectors == 1 ) :
-		$container = shoestrap_getVariable( 'shoestrap_gridder_container' );
-	else :
-		$container  = '.row .main .wrapperdiv';
-	endif;
-
-
-	?>
-
-	<?php if ( $isotope == 1 || $infinitescroll == 1 ) : ?>
-		<script>
-		// Using jQuery.noConflict
-		var $j = jQuery.noConflict();
-
-		$j(window).load(function(){
-			var container = $j('<?php echo $container; ?>');
-			
-			// Isotope
-			<?php if ( $isotope == 1 ) : ?>
-				$j(container).isotope({
-					animationEngine: "best-available"
-				});
-				// SLOPPY
-				$j(container).isotope({
-				    layoutMode: "sloppyMasonry",
-				    itemSelector: "<?php echo $itemSelector; ?>"
-				});
-			<?php endif; ?>
-
-			// Infinite
-			<?php if ( $infinitescroll == 1 ) : ?>
-				$j(container).infinitescroll({
-					navSelector  : "<?php echo $navSelector; ?>",
-					nextSelector : "<?php echo $nextSelector; ?>",
-					itemSelector : "<?php echo $itemSelector; ?>",
-					loading: {
-						msgText: "<?php echo $msgText; ?>",
-						finishedMsg: "<?php echo $finishedMsg; ?>"
-					}
-			<?php endif; ?>
-				<?php if ( $isotope == 1 && $infinitescroll == 1 ) : ?>
-					// trigger Masonry as a callback
-					},function( newElements ) {
-						// hide new items while they are loading
-						var newElems = $j( newElements ).css({ opacity: 0 });
-						// ensure that images load before adding to masonry layout
-						$j(newElems).imagesLoaded(function(){
-							// show elems now they're ready
-							$j(newElems).animate({ opacity: 1 });
-							$j(container).isotope( 'appended', $j(newElems), true );
-						});
-					});
-				<?php elseif ( $isotope == 0 && $infinitescroll == 1 ): ?>
-					});
-				<?php endif; ?>
-
-		});
-		</script>
-	<?php endif;
-}
+/*
+ * Load our custom scripts
+ */
+if ( !function_exists( 'shoestrap_gridder_load_scripts' ) ) :
+	function shoestrap_gridder_load_scripts() {
+		$selectors = shoestrap_getVariable( 'shoestrap_gridder_selectors' );
+		if ( $selectors == 1 ) :
+			$navSelector  = shoestrap_getVariable( 'shoestrap_gridder_navigation' );
+			$nextSelector = shoestrap_getVariable( 'shoestrap_gridder_nextpage' );
+			$itemSelector = shoestrap_getVariable( 'shoestrap_gridder_item' );
+			$container 		= shoestrap_getVariable( 'shoestrap_gridder_container' );
+		else :
+			$navSelector  = '.pager';
+			$nextSelector = '.pager .previous a';
+			$itemSelector = '.hentry';
+			$container  	= '.row .main .wrapperdiv';
+		endif;
+		wp_enqueue_script('shoestrap_gridder_script', SHOESTRAPGRIDDERURL . '/assets/js/scripts.js');
+		wp_localize_script('shoestrap_gridder_script', 'shoestrap_gridder_vars', array(
+				'isotope' 				=> shoestrap_getVariable( 'shoestrap_gridder_isotope' ),
+				'infinitescroll' 	=> shoestrap_getVariable( 'shoestrap_gridder_infinite_scroll' ),
+				'msgText' 				=> "<div class='progress progress-striped active' style='width:220px;margin-bottom:0px;'><div class='progress-bar progress-bar-" . __( shoestrap_getVariable( 'shoestrap_gridder_loading_color' ) ) . "' style='width: 100%;'><span class='edd_bar_text'>" . __( shoestrap_getVariable( 'shoestrap_gridder_loading_text' ) ) . "<span></div></div>",
+				'finishedMsg' 		=> "<div class='progress progress-striped active' style='width:220px;margin-bottom:0px;'><div class='progress-bar progress-bar-" . __( shoestrap_getVariable( 'shoestrap_gridder_end_color' ) ) . "' style='width: 100%;'><span class='edd_bar_text'>" . __( shoestrap_getVariable( 'shoestrap_gridder_end_text' ) ) . "<span></div></div>",
+				'selectors'				=> shoestrap_getVariable( 'shoestrap_gridder_selectors' ),
+				'navSelector'  		=> shoestrap_getVariable( 'shoestrap_gridder_navigation' ),
+				'navSelector'			=> $navSelector,
+				'nextSelector'		=> $nextSelector,
+				'itemSelector'		=> $itemSelector,
+				'container'				=> $container
+			)
+		);
+	}
 endif;
+add_action('wp_enqueue_scripts', 'shoestrap_gridder_load_scripts', 101 );
 
 
 /*
@@ -165,7 +95,6 @@ if ( !function_exists( 'shoestrap_gridder_enqueue_resources_checked' ) ) :
 function shoestrap_gridder_enqueue_resources_checked() {
 	if ( !is_singular() ) :
 		add_action('wp_enqueue_scripts', 'shoestrap_gridder_enqueue_resources', 201);
-		add_action( 'wp_footer', 'shoestrap_gridder_script', 202 );
 	endif;
 }
 endif;

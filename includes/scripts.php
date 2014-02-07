@@ -75,8 +75,6 @@ if ( !function_exists( 'shoestrap_gridder_load_scripts' ) ) :
 				'infinitescroll' 	=> shoestrap_getVariable( 'shoestrap_gridder_infinite_scroll' ),
 				'msgText' 				=> "<div class='progress progress-striped active' style='width:220px;margin-bottom:0px;'><div class='progress-bar progress-bar-" . __( shoestrap_getVariable( 'shoestrap_gridder_loading_color' ) ) . "' style='width: 100%;'><span class='edd_bar_text'>" . __( shoestrap_getVariable( 'shoestrap_gridder_loading_text' ) ) . "<span></div></div>",
 				'finishedMsg' 		=> "<div class='progress progress-striped active' style='width:220px;margin-bottom:0px;'><div class='progress-bar progress-bar-" . __( shoestrap_getVariable( 'shoestrap_gridder_end_color' ) ) . "' style='width: 100%;'><span class='edd_bar_text'>" . __( shoestrap_getVariable( 'shoestrap_gridder_end_text' ) ) . "<span></div></div>",
-				'selectors'				=> shoestrap_getVariable( 'shoestrap_gridder_selectors' ),
-				'navSelector'  		=> shoestrap_getVariable( 'shoestrap_gridder_navigation' ),
 				'navSelector'			=> $navSelector,
 				'nextSelector'		=> $nextSelector,
 				'itemSelector'		=> $itemSelector,

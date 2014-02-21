@@ -30,7 +30,7 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 					add_filter( 'shoestrap_title_section', array( $this, 'title' ) );
 
 					if ( $settings['shoestrap_gridder_box_style'] == 'panel' )
-						add_action( 'shoestrap_in_article_bottom', array( $this, 'dummy_close_divs' ) );
+						add_action( 'shoestrap_in_article_bottom', array( $this, 'dummy_close_div' ) );
 				}
 			}
 
@@ -226,6 +226,11 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 		}
 
 		function css() {
+
+			// Do not continue if is_singular
+			if ( is_singular() )
+				return;
+
 			$settings = get_option( SHOESTRAP_OPT_NAME );
 
 			$background_color = null;
@@ -239,7 +244,7 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 				return;
 
 			if ( class_exists( 'ShoestrapColor' ) ) {
-				$css = '<style>#main .hentry {';
+				$css = '#main .hentry {';
 
 				if ( ShoestrapColor::get_brightness( $background_color ) >= 160 ) {
 
@@ -252,14 +257,18 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 					$css .= 'background-color: ' . ShoestrapColor::adjust_brightness( $background_color, -20 ) . ';';
 				}
 
-				$css .= '}</style>';
+				$css .= '}';
 			}
 
 			wp_add_inline_style( 'shoestrap_css', $css );
 		}
 
-		function dummy_close_divs() {
-			echo '</div></div>';
+		function dummy_close_div() {
+			// Do not continue if is_singular
+			if ( is_singular() )
+				return;
+
+			echo '</div>';
 		}
 
 		/*
@@ -267,56 +276,60 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 		 */
 		function post_classes( $classes ) {
 			global $post;
-			$settings = get_option( SHOESTRAP_OPT_NAME );
-			// get the specified width ( narrow/normal/wide )
-			$mode = $settings['shoestrap_gridder_posts_columns'];
-			
-			// Remove unnecessary classes
-			foreach (range(0, 12) as $number) {
-				$remove_classes[] = 'col-xs-'.$number.'';
-				$remove_classes[] = 'col-sm-'.$number.'';
-				$remove_classes[] = 'col-md-'.$number.'';
-				$remove_classes[] = 'col-lg-'.$number.'';
+
+			// Do not continue if is_singular
+			if ( !is_singular() ) {
+
+				$settings = get_option( SHOESTRAP_OPT_NAME );
+				// get the specified width ( narrow/normal/wide )
+				$mode = $settings['shoestrap_gridder_posts_columns'];
+				
+				// Remove unnecessary classes
+				foreach ( range( 0, 12 ) as $number) {
+					$remove_classes[] = 'col-xs-' . $number . '';
+					$remove_classes[] = 'col-sm-' . $number . '';
+					$remove_classes[] = 'col-md-' . $number . '';
+					$remove_classes[] = 'col-lg-' . $number . '';
+				}
+
+				$classes = array_diff( $classes, $remove_classes );
+
+				// calculate the css classes based on the above selection
+				if ( $mode == 'narrow' ) {
+
+					$classes[] = 'col-lg-3';
+					$classes[] = 'col-md-4';
+					$classes[] = 'col-sm-6';
+					$classes[] = 'col-xs-12';
+
+				} elseif ( $mode == 'normal' ) {
+
+					$classes[] = 'col-lg-4';
+					$classes[] = 'col-md-6';
+					$classes[] = 'col-sm-6';
+					$classes[] = 'col-xs-12';
+
+				} else {
+
+					$classes[] = 'col-lg-6';
+					$classes[] = 'col-md-6';
+					$classes[] = 'col-sm-12';
+					$classes[] = 'col-xs-12';
+
+				}
 			}
-
-			$classes = array_diff( $classes, $remove_classes );
-
-			$classes[] = '';
-
-			// calculate the css classes based on the above selection
-			if ( $mode == 'narrow' ) {
-
-				$classes[] = 'col-lg-3';
-				$classes[] = 'col-md-4';
-				$classes[] = 'col-sm-6';
-				$classes[] = 'col-xs-12';
-
-			} elseif ( $mode == 'normal' ) {
-
-				$classes[] = 'col-lg-4';
-				$classes[] = 'col-md-6';
-				$classes[] = 'col-sm-6';
-				$classes[] = 'col-xs-12';
-
-			} else {
-
-				$classes[] = 'col-lg-6';
-				$classes[] = 'col-md-6';
-				$classes[] = 'col-sm-12';
-				$classes[] = 'col-xs-12';
-
-			}
-
-			// If this is NOT a singular post/page etc, return the classes
-			if ( !is_singular() )
-				return $classes;
-
+			return $classes;
 		}
 
 		/*
 		 * Add an extra div for wells or panels
 		 */
 		function article_in_top() {
+
+			// Do not continue if is_singular
+			if ( is_singular() )
+				return;
+
 			$settings = get_option( SHOESTRAP_OPT_NAME );
 
 			$class = '';
@@ -333,10 +346,18 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 		 * Wrap the content without the page header into a div
 		 */
 		function open_wrapper_div() {
+			// Do not continue if is_singular
+			if ( is_singular() )
+				return;
+
 			echo '<div class="wrapperdiv row">';
 		}
 
 		function close_wrapper_div() {
+			// Do not continue if is_singular
+			if ( is_singular() )
+				return;
+
 			echo '</div>';
 		}
 
@@ -344,6 +365,10 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 		 * Enqueue the necessary javascript and css resources
 		 */
 		function enqueue_assets() {
+			// Do not continue if is_singular
+			if ( is_singular() )
+				return;
+
 			$settings = get_option( SHOESTRAP_OPT_NAME );
 
 			$infinitescroll = $settings['shoestrap_gridder_infinite_scroll'];
@@ -382,6 +407,10 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 		 * Load our custom scripts
 		 */
 		function load_scripts() {
+			// Do not continue if is_singular
+			if ( is_singular() )
+				return;
+
 			$settings = get_option( SHOESTRAP_OPT_NAME );
 
 			$selectors = $settings['shoestrap_gridder_selectors'];
@@ -420,27 +449,32 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 		 * The title secion.
 		 * Overrides the default one included in the theme.
 		 */
-		function title() {
-			$settings = get_option( SHOESTRAP_OPT_NAME );
+		function title( $title ) {
+			// Do not continue if is_singular
+			if ( !is_singular() ) {
+				$settings = get_option( SHOESTRAP_OPT_NAME );
 
-			$mode = $settings['shoestrap_gridder_box_style'];
+				$mode = $settings['shoestrap_gridder_box_style'];
 
-			if ( $mode == 'panel' ) {
-				$header  = '<header class="panel-heading">';
-				$element = 'h4';
-				$after   = '<div class="panel-body">';
-			} elseif ( $mode == 'well' ) {
-				$header  = '<header>';
-				$element = 'h3';
-				$after   = '';
+				if ( $mode == 'panel' ) {
+					$header  = '<header class="panel-heading">';
+					$element = 'h4';
+					$after   = '<div class="panel-body">';
+				} elseif ( $mode == 'well' ) {
+					$header  = '<header>';
+					$element = 'h3';
+					$after   = '<div class="entry-body">';
+				}
+
+				$content  = $header . '<title>' . get_the_title() . '</title><' . $element . ' class="entry-title">';
+				$content .= '<a href="' . get_permalink() . '">' . apply_filters( 'shoestrap_title', get_the_title() ) . '</a>';
+				$content .= '</' . $element . '></header>' . $after;
+
+				return $content;
+			} else {
+				return $title;
 			}
-
-			$content  = $header . '<title>' . get_the_title() . '</title><' . $element . ' class="entry-title">';
-			$content .= '<a href="' . get_permalink() . '">' . apply_filters( 'shoestrap_title', get_the_title() ) . '</a>';
-			$content .= '</' . $element . '></header>';
-
-			return $content;
 		}
 	}
+	$gridder = new ShoestrapGridder();
 }
-$gridder = new ShoestrapGridder();

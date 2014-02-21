@@ -16,14 +16,7 @@ if ( !defined( 'REDUX_OPT_NAME' ) )
 define( 'SHOESTRAPGRIDDERURL', plugins_url( '', __FILE__ ) );
 define( 'SHOESTRAPGRIDDERFILE', __FILE__ );
 
-if ( file_exists( dirname( __FILE__ ) . '/includes/admin.php' ) )
-	require_once dirname( __FILE__ ) . '/includes/admin.php';
-
-if ( file_exists( dirname( __FILE__ ) . '/includes/functions.php' ) )
-	require_once dirname( __FILE__ ) . '/includes/functions.php';
-
-if ( file_exists( dirname( __FILE__ ) . '/includes/scripts.php' ) )
-	require_once dirname( __FILE__ ) . '/includes/scripts.php';
-
-if ( file_exists( dirname( __FILE__ ) . '/includes/template-functions.php' ) )
-	require_once dirname( __FILE__ ) . '/includes/template-functions.php';
+function shoestrap_gridder_include_files() {
+	require_once dirname( __FILE__ ) . '/includes/class.ShoestrapGridder.php';
+}
+add_action( 'shoestrap_include_files', 'shoestrap_gridder_include_files' );

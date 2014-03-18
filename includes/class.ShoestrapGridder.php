@@ -191,7 +191,7 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 				'title'     => __( 'Infinite Scroll Navigation Selector', 'shoestrap' ),
 				'desc'      => __( 'Select your Navigation. (e.g. .pager or .pagination)', 'shoestrap' ),
 				'id'        => 'shoestrap_gridder_navigation',
-				'default'   => '.pager',
+				'default'   => '.pagination',
 				'type'      => 'text',
 				'required'  => array( 'shoestrap_gridder_selectors','=',array( '1' ) ),
 			);
@@ -200,7 +200,7 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 				'title'     => __( 'Infinite Scroll Next-Page Selector', 'shoestrap' ),
 				'desc'      => __( 'Select your Next-Page. (e.g. .pager .previous a)', 'shoestrap' ),
 				'id'        => 'shoestrap_gridder_nextpage',
-				'default'   => '.pager .previous a',
+				'default'   => '.pagination li a.next',
 				'type'      => 'text',
 				'required'  => array( 'shoestrap_gridder_selectors','=',array( '1' ) ),
 			);
@@ -275,7 +275,7 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 		 * Add classes to single posts
 		 */
 		function post_classes( $classes ) {
-			global $post;
+			global $post, $ss_framework;
 
 			// Do not continue if is_singular
 			if ( !is_singular() ) {
@@ -286,35 +286,23 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 				
 				// Remove unnecessary classes
 				foreach ( range( 0, 12 ) as $number) {
-					$remove_classes[] = 'col-xs-' . $number . '';
-					$remove_classes[] = 'col-sm-' . $number . '';
-					$remove_classes[] = 'col-md-' . $number . '';
-					$remove_classes[] = 'col-lg-' . $number . '';
+					$remove_classes[] = $ss_framework->column_classes( array( 'mobile' => $number, 'tablet' => $number, 'medium' => $number, 'large' => $number ), null );
 				}
 
 				$classes = array_diff( $classes, $remove_classes );
 
 				// calculate the css classes based on the above selection
 				if ( $mode == 'narrow' ) {
-
-					$classes[] = 'col-lg-3';
-					$classes[] = 'col-md-4';
-					$classes[] = 'col-sm-6';
-					$classes[] = 'col-xs-12';
+					
+					$classes[] = $ss_framework->column_classes( array( 'mobile' => 12, 'tablet' => 6, 'medium' => 4, 'large' => 3 ), null );
 
 				} elseif ( $mode == 'normal' ) {
 
-					$classes[] = 'col-lg-4';
-					$classes[] = 'col-md-6';
-					$classes[] = 'col-sm-6';
-					$classes[] = 'col-xs-12';
+					$classes[] = $ss_framework->column_classes( array( 'mobile' => 12, 'tablet' => 6, 'medium' => 6, 'large' => 4 ), null );
 
 				} else {
 
-					$classes[] = 'col-lg-6';
-					$classes[] = 'col-md-6';
-					$classes[] = 'col-sm-12';
-					$classes[] = 'col-xs-12';
+					$classes[] = $ss_framework->column_classes( array( 'mobile' => 12, 'tablet' => 12, 'medium' => 6, 'large' => 6 ), null );
 
 				}
 			}
@@ -350,7 +338,8 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 			if ( is_singular() )
 				return;
 
-			echo '<div class="wrapperdiv row">';
+			global $ss_framework;
+			echo $ss_framework->open_row( 'div', null, 'wrapperdiv', null );
 		}
 
 		function close_wrapper_div() {
@@ -358,7 +347,8 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 			if ( is_singular() )
 				return;
 
-			echo '</div>';
+			global $ss_framework;
+			echo $ss_framework->close_row( 'div' );
 		}
 
 		/*
@@ -424,8 +414,8 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 
 			} else {
 
-				$navSelector  = '.pager';
-				$nextSelector = '.pager .previous a';
+				$navSelector  = '.pagination';
+				$nextSelector = '.pagination li a.next';
 				$itemSelector = '.hentry';
 				$container    = '.row .main .wrapperdiv';
 
@@ -452,23 +442,24 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 		function title( $title ) {
 			// Do not continue if is_singular
 			if ( !is_singular() ) {
+				global $ss_framework;
 				$settings = get_option( SHOESTRAP_OPT_NAME );
 
 				$mode = $settings['shoestrap_gridder_box_style'];
 
 				if ( $mode == 'panel' ) {
-					$header  = '<header class="panel-heading">';
+					$header  = $ss_framework->open_panel_heading( null );
 					$element = 'h4';
-					$after   = '<div class="panel-body">';
+					$after   = $ss_framework->open_panel_body( null );
 				} elseif ( $mode == 'well' ) {
-					$header  = '<header>';
+					$header  = '<div>';
 					$element = 'h3';
 					$after   = '<div class="entry-body">';
 				}
 
 				$content  = $header . '<title>' . get_the_title() . '</title><' . $element . ' class="entry-title">';
 				$content .= '<a href="' . get_permalink() . '">' . apply_filters( 'shoestrap_title', get_the_title() ) . '</a>';
-				$content .= '</' . $element . '></header>' . $after;
+				$content .= '</' . $element . '></div>' . $after;
 
 				return $content;
 			} else {

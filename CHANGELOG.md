@@ -1,5 +1,9 @@
 ## Changelog
 
+### version 3.2
+Compatibility with Shoestrap 3.2
+General code improvements
+
 ### version 3.0.10
 Replace Masonry.js with Isotope.js
 General code improvements

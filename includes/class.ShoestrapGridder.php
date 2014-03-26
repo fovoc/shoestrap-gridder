@@ -62,7 +62,7 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 
 			$section = array(
 				'title' => __( 'Gridder', 'shoestrap' ),
-				'icon'  => 'el-icon-th icon-large'
+				'icon'  => 'el-icon-th'
 			);
 
 			$fields[] = array( 

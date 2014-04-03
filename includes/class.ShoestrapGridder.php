@@ -36,8 +36,12 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 
 			$infinitescroll = $settings['shoestrap_gridder_infinite_scroll'];
 			$isotope        = $settings['shoestrap_gridder_isotope'];
+			$blog_title     = $settings['shoestrap_gridder_blog_title'];
 
 			if ( $isotope == 1 || $infinitescroll == 1 ) {
+
+				if ( $blog_title )
+					add_action( 'shoestrap_index_begin', array( $this, 'show_blog_title' ), 9 );
 
 				// Wrap the content without the page header into a div
 				add_action( 'shoestrap_index_begin', array( $this, 'open_wrapper_div' ), 10 );
@@ -63,6 +67,14 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 			$section = array(
 				'title' => __( 'Gridder', 'shoestrap' ),
 				'icon'  => 'el-icon-th'
+			);
+
+			$fields[] = array( 
+				'title' 		=> __( 'Show Blog Title', 'shoestrap' ),
+				'desc'      => __( 'Default: Off', 'shoestrap' ),
+				'id'        => 'shoestrap_gridder_blog_title',
+				'default'   => 0,
+				'type'      => 'switch'
 			);
 
 			$fields[] = array( 
@@ -328,6 +340,20 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 				$class = 'panel panel-default';
 
 			echo '<div class="' . $class . '">';
+		}
+
+		/*
+		 * Show the Blog page title
+		 */
+		function show_blog_title() {
+			// Do not continue if is_singular
+			if ( is_singular() )
+				return;
+
+			$blog_title  = '<h1 class="entry-title">';
+			$blog_title .= get_the_title( get_option('page_for_posts', true) );
+			$blog_title .= '</h1>';
+			echo $blog_title;
 		}
 
 		/*

@@ -291,7 +291,7 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 			global $post, $ss_framework;
 
 			// Do not continue if is_singular
-			if ( !is_singular() ) {
+			if ( !is_singular() && !is_post_type_archive('tribe_events') ) {
 
 				$settings = get_option( SHOESTRAP_OPT_NAME );
 				// get the specified width ( narrow/normal/wide )

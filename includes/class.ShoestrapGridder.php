@@ -255,6 +255,7 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 			if ( is_null( $background_color ) )
 				return;
 
+			$css = '';
 			if ( class_exists( 'ShoestrapColor' ) ) {
 				$css = '#main .hentry {';
 

@@ -3,7 +3,7 @@
 Plugin Name:         Shoestrap 3 Gridder Addon
 Plugin URI:          http://shoestrap.org/downloads/shoestrap-3-gridder-addon/
 Description:         This plugin adds infinite scroll and isotope's masonry to the Shoestrap 3 theme.
-Version:             3.2
+Version:             3.3
 Author:              Aristeides Stathopoulos, Dimitris Kalliris
 Author URI:          http://wpmu.io
 */
@@ -22,7 +22,7 @@ function shoestrap_gridder_updater() {
 	$args = array(
 		'remote_api_url' => 'http://shoestrap.org',
 		'item_name'      => 'Shoestrap 3 Gridder Addon',
-		'version'        => '3.2',
+		'version'        => '3.3',
 		'author'         => 'Aristeides Stathopoulos, Dimitris Kalliris',
 		'mode'           => 'plugin',
 		'title'          => 'Shoestrap Gridder Addon License',

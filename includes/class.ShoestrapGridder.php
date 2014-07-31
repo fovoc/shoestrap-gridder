@@ -12,9 +12,12 @@ if ( !class_exists( 'ShoestrapGridder' ) ) {
 			$settings = get_option( SHOESTRAP_OPT_NAME );
 
 			// compatibility for Shoestrap version < 3.0.3.02
-			// replace following filter with the commented one right below it.
-			add_filter( 'redux/options/' . SHOESTRAP_OPT_NAME . '/sections', array( $this, 'options' ), 187 );
-			// add_filter( 'redux-sections-'.REDUX_OPT_NAME, array( $this, 'options' ), 20 );
+			if ( defined( 'SHOESTRAP_OPT_NAME' ) ) {
+				$option_name = SHOESTRAP_OPT_NAME;
+			} else if ( defined( 'REDUX_OPT_NAME' ) ) {
+				$option_name = REDUX_OPT_NAME;
+			}
+			add_filter( 'redux/options/' . $option_name . '/sections', array( $this, 'options' ), 187 );
 
 			// Add the CSS
 			add_action( 'wp_enqueue_scripts', array( $this, 'css' ), 101 );
